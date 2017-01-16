@@ -1,1 +1,58 @@
-h1 hi
+.content
+  .container-fluid
+    .row
+      .col-md-12
+        .crum(
+          ng-click="goto(user)"
+        ) 
+          .word Home
+        
+        .crum(
+          ng-repeat="crum in bread"
+          ng-click="goto(crum)"
+        ) 
+          | > 
+          .word {{crum.title}}
+        
+    .row
+      .col-md-3
+        h1 Topics
+        .card(
+          ng-click="openNote(note)"
+          ng-repeat="note in current.notes"
+        )
+          .title {{note.title}}
+          
+        div
+          .content 
+            form
+              input(
+                placeholder="title"
+                ng-model="noteToAdd.title"
+              )
+              button(
+                ng-click="addNote()"
+              ) Add Note  
+            
+      .col-md-8
+        h1 Notes
+        .note(
+          id="note-input"
+          marked="current.markdown"
+          ng-click="editingNote = true"
+          ng-show="!editingNote"
+        )
+        textarea.notearea(
+          ng-show="editingNote"
+          ng-model="current.markdown"
+          click-outside="editingNote = false; save()"
+          outside-if-not="note-input"
+        )
+        //- text-angular(
+        //-   id="note"
+        //-   ng-show="editingNote"
+        //-   ng-model="current.markdown"
+        //-   ta-toolbar="[['bold', 'italics', 'underline', 'strikeThrough', 'ul', 'ol', 'redo', 'undo']]"
+        //-   click-outside="editingNote = false; save()"
+        //-   outside-if-not="note-input"
+        //- )

@@ -6,7 +6,5 @@ module.exports = new Schema
   email: String
   password: String
   salt: String
-  verify: String
-  verified: Boolean
-  resetUuid: String
-  resetTTL: Date
+  notes: Array
+  markdown: String

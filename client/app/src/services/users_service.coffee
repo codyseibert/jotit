@@ -10,13 +10,13 @@ module.exports = [
     API_PATH
   ) ->
 
-    forgot: (body) ->
-      $http.post "#{API_PATH}/password/forgot", body
+    show: (userId) ->
+      $http.get "#{API_PATH}/users/#{userId}"
         .then (response) ->
           response.data
 
-    reset: (resetInfo) ->
-      $http.post "#{API_PATH}/password/reset", resetInfo
+    put: (user) ->
+      $http.put "#{API_PATH}/users/#{user._id}", user
         .then (response) ->
           response.data
 

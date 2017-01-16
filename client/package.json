@@ -25,6 +25,7 @@
     "angular-intro.js": "^2.0.3",
     "angular-inview": "^2.0.0",
     "angular-local-storage": "^0.2.7",
+    "angular-marked": "^1.2.2",
     "angular-masonry": "^0.16.0",
     "angular-material": "^1.0.7",
     "angular-moment": "^0.10.3",

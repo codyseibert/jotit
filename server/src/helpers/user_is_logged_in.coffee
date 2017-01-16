@@ -14,7 +14,7 @@ module.exports = (req, res, next) ->
         res.status 400
         res.send 'invalid token'
       else
-        req.user = decoded._doc
+        req.user = decoded
         next()
   catch err
     res.status 401

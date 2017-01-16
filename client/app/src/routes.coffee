@@ -16,4 +16,11 @@ module.exports = (
           controller: 'MainCtrl'
           templateUrl: 'main/main.html'
 
+    .state 'login',
+      url: '/login'
+      views:
+        'main':
+          controller: 'LoginCtrl'
+          templateUrl: 'login/login.html'
+
   return this
