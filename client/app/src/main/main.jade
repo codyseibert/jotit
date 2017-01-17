@@ -1,53 +1,84 @@
 .content
   .container-fluid
     .row
-      .col-md-12
-        .crum(
-          ng-click="goto(user)"
-        ) 
-          .word Home
-        
-        .crum(
-          ng-repeat="crum in bread"
-          ng-click="goto(crum)"
-        ) 
-          | > 
-          .word {{crum.title}}
+      .col-md-10
+        .card1.crums
+          .crum(
+            ng-click="goto(user)"
+          ) 
+            .word Home
+          
+          .crum(
+            ng-repeat="crum in bread"
+            ng-click="goto(crum)"
+          ) 
+            i.fa.fa-caret-right
+            .word {{crum.title}}
+          
+      .col-md-2
+        .right
+          a(
+            href="#"
+            ng-click="logout()"
+          ) Logout
         
     .row
       .col-md-3
-        h1 Topics
-        .card(
-          ng-click="openNote(note)"
-          ng-repeat="note in current.notes"
-        )
-          .title {{note.title}}
+        .card1
+          .top
+            span(
+              ng-show="!editingTitle"
+            ) {{current.title || "Home"}}
+            input(
+              type="text"
+              ng-model="current.title"
+              ng-show="editingTitle"
+            )
+            i.fa.fa-pencil(
+              ng-click="editingTitle = true"
+              ng-show="!editingTitle && current.title"
+            )
+            i.fa.fa-save(
+              ng-click="editingTitle = false; save()"
+              ng-show="editingTitle && current.title"
+            )
           
-        div
-          .content 
-            form
-              input(
-                placeholder="title"
-                ng-model="noteToAdd.title"
-              )
-              button(
-                ng-click="addNote()"
-              ) Add Note  
+          .folder(
+            ng-click="openNote(note)"
+            ng-repeat="note in current.notes"
+            ng-style="{'background-color': getColor($index)}"
+          ) 
+            .tab(
+              ng-style="{'background-color': getColor($index)}"
+            )
+            .title {{note.title}}
+            .count {{note.notes.length || 0}}
+          
+          .add
+            i.fa.fa-plus(
+              ng-click="addNote()"
+            )
             
-      .col-md-8
-        h1 Notes
+      .col-md-8.middle 
+        .title
+          i.fa.fa-pencil(
+            ng-click="editingNote = true"
+            ng-show="!editingNote"
+          )
+          i.fa.fa-save(
+            ng-click="editingNote = false; save()"
+            ng-show="editingNote"
+          )
+        
         .note(
-          id="note-input"
           marked="current.markdown"
-          ng-click="editingNote = true"
           ng-show="!editingNote"
         )
-        textarea.notearea(
-          ng-show="editingNote"
-          ng-model="current.markdown"
-          click-outside="editingNote = false; save()"
-          outside-if-not="note-input"
-        )
+        .wrapper
+          textarea.notearea(
+            ng-show="editingNote"
+            ng-model="current.markdown"
+          )
         //- text-angular(
         //-   id="note"
         //-   ng-show="editingNote"

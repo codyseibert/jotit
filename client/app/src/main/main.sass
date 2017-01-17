@@ -1,3 +1,78 @@
+.card1
+  background: #fff
+  border-radius: 2px
+  display: inline-block
+  margin: 1rem
+  width: 100%
+  position: relative
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24)
+
+.crums
+  padding: 10px
+  padding-left: 30px
+  width: 100%
+
+.top
+  text-align: center
+  font-size: 30px
+  font-weight: bold
+  margin-top: 10px
+  margin-bottom: 10px
+
+  i
+    cursor: pointer
+    margin-left: 14px
+
+  i:hover
+    color: #666
+
+.add
+  text-align: center
+  font-size: 30px
+  font-weight: bold
+  margin-top: 16px
+  margin-bottom: 10px
+
+  i
+    cursor: pointer
+
+  i:hover
+    color: #666
+
+.folder
+  position: relative
+  cursor: pointer
+  background-color: #ff9000
+  padding: 6px
+  color: white
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24)
+
+  .tab
+    top: -6px
+    left: 8px
+    border-top-right-radius: 8px
+    border-top-left-radius: 8px
+    background-color: #ff9000
+    height: 20px
+    width: 50px
+    position: absolute
+
+  .title
+    position: relative
+    font-size: 20px
+    margin-left: 60px
+
+  .count
+    font-size: 12px
+    position: absolute
+    top: 13px
+    right: 14px
+    color: #fee
+
+.folder:hover
+  color: #FFF
+  background-color: blue
+
 .card
   border-bottom: 1px solid #DDD
   padding: 2px
@@ -16,6 +91,11 @@
   font-size: 24px
   font-weight: bold
 
+  i
+    margin-left: 20px
+    margin-right: 16px
+    font-size: 16px
+
 .crum .word
   cursor: pointer
   display: inline-block
@@ -24,14 +104,44 @@
   color: blue
 
 .note
-  background-color: #eee
-  min-height: 200px
-  cursor: pointer
-  
-.note:hover
-  border: 1px dashed black
-  background-color: #ddd
+  min-height: 300px
+  padding: 20px
+
+  background: #fff
+  border-radius: 2px
+  display: inline-block
+  margin: 1rem
+  position: relative
+  width: 100%
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24)
 
 .notearea
   width: 100%
   min-height: 300px
+  border-radius: 2px
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24)
+  position: relative
+  margin: 1rem
+  display: inline-block
+  background: #fff
+  padding: 20px
+  padding-top: 50px
+
+.right
+  text-align: right
+
+.middle
+  .title
+    font-size: 30px
+    font-weight: bold
+    color: #333
+
+    i
+      position: absolute
+      cursor: pointer
+      z-index: 1
+      top: 18px
+      left: 38px
+
+    i:hover
+      color: #666

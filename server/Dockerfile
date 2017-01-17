@@ -9,8 +9,7 @@ COPY dist /app
 COPY node_modules /app/node_modules
 
 ENV MONGO_HOST 172.31.43.124
-ENV BCRYPT_PASSWORD testing
-ENV JWT_PASSWORD abc
+ENV JWT_PASSWORD testing
 
 EXPOSE 8081
 

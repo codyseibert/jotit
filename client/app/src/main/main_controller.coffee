@@ -12,6 +12,15 @@ module.exports = [
     _
   ) ->
 
+    colors = [
+      '#ff72a0'
+      '#565fc8'
+      '#ff9000'
+      '#78cb0b'
+      '#1aacf7'
+      '#00c5c6'
+    ]
+
     $scope.user = null
     $scope.current = null
     $scope.editingNote = false
@@ -23,7 +32,6 @@ module.exports = [
 
     $scope.noteToAdd =
       title: ''
-      description: ''
 
     $scope.note = null
     userId = TokenService.getUser()._id
@@ -39,27 +47,36 @@ module.exports = [
         $scope.current = u
         $scope.current.parent = null
 
+    $scope.getColor = (index) ->
+      colors[index % colors.length]
+
     $scope.goto = (note) ->
       while $scope.current isnt note
         back()
 
     $scope.save = ->
+      $scope.editingNote = false
       toPut = _.cloneDeep $scope.user
       clean toPut
       UsersService.put toPut
 
     $scope.addNote = ->
       $scope.current.notes ?= []
+      $scope.noteToAdd.title = 'untitled'
       $scope.current.notes.push $scope.noteToAdd
       $scope.noteToAdd =
         title: ''
-        description: ''
       $scope.save()
 
     $scope.openNote = (note) ->
       note.parent = $scope.current
       $scope.current = note
       $scope.bread.push note
+
+    $scope.logout = ->
+      TokenService.setToken null
+      TokenService.setUser null
+      $state.go 'login'
 
     back = ->
       $scope.current = $scope.current.parent
