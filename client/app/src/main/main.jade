@@ -86,14 +86,16 @@
                 ng-show="topic.hovered && !topic.editing"
                 ng-click="$event.stopPropagation(); topic.editing = true"
               )
-              .count {{topic.topics.length || 0}}
+              .count {{count(topic)}}
           
             
       .col-md-9.middle
         .row.toolbar
           .col-md-12
             .addNote
-              button
+              button(
+                ng-click="addNote()"
+              )
                 i.fa.fa-plus
                 | New Note
               

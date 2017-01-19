@@ -33,32 +33,22 @@ module.exports = [
     $scope.note = null
     userId = TokenService.getUser()._id
 
+    $scope.count = (topic) ->
+      sum = 0
+      if topic.notes?
+        sum += topic.notes.length
+      if topic.topics?
+        for t in topic.topics
+          sum += $scope.count t
+      sum
+
     clean = (node) ->
       delete node.parent
       if node.topics?
         _.each node.topics, clean
 
-    migrate = (node) ->
-      if node.notes?
-        topics: node.notes.map (n) ->
-          m = migrate n
-          title: n.title
-          topics: m.topics
-          notes: [
-            markdown: n.markdown
-          ]
-        notes: [
-          markdown: node.markdown
-        ]
-      else
-        topics: []
-        notes: []
-
     UsersService.show userId
       .then (u) ->
-        if u.notes?
-          u.data = migrate u
-          delete u.notes
         $scope.user = u
         $scope.user.data ?= {
           notes: []
@@ -91,6 +81,7 @@ module.exports = [
       $scope.current.notes ?= []
       $scope.current.notes.push
         markdown: 'Click to Write Note'
+      $scope.save()
 
     $scope.openTopic = (topic) ->
       topic.hovered = false
