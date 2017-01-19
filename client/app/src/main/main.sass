@@ -1,3 +1,25 @@
+.header
+  width: 100%
+  height: 50px
+  background-color: white
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24)
+
+  .logout
+    color: #e53935
+    cursor: pointer
+    position: relative
+    top: 12px
+    right: 16px
+    font-size: 18px
+
+  .logout:hover
+    color: #d52925
+
+  i
+    cursor: pointer
+    position: relative
+    margin-right: 5px
+
 .card1
   background: #fff
   border-radius: 2px
@@ -9,7 +31,6 @@
 
 .crums
   padding: 10px
-  padding-left: 30px
   width: 100%
 
 .top
@@ -26,18 +47,75 @@
   i:hover
     color: #666
 
-.add
-  text-align: center
-  font-size: 30px
-  font-weight: bold
-  margin-top: 16px
-  margin-bottom: 10px
+.toolbar
+  margin-bottom: 14px
+
+.addNote
+  display: inline-block
+
+  button
+    padding: 10px
+    background-color: #ffa000
+    border: none
+    color: white
+    width: 120px
+    margin-right: 10px
+
+  button:hover
+    background-color: #ee9000
 
   i
     cursor: pointer
+    position: relative
+    margin-right: 5px
+
+.search
+  position: relative
+  display: inline-block
+
+  input
+    padding: 10px
+    -webkit-appearance: none
+    border: 1px solid #999
+    outline: none
+    padding-left: 38px
+    width: 220px
+
+  i
+    position: absolute
+    left: 15px
+    top: 12px
+    font-size: 20px
+    color: #999
+
+.add
+  font-size: 14px
+  font-weight: bold
+  color: white
+  margin-bottom: 16px
+
+  button
+    padding: 10px
+    background-color: #00b0ff
+    border: none
+    color: white
+    padding-left: 20px
+    padding-right: 20px
+
+  button:hover
+    background-color: #00b0ee
+
+  i
+    cursor: pointer
+    position: relative
+    margin-right: 5px
 
   i:hover
     color: #666
+
+.folders
+  .empty
+    text-align: center
 
 .folder
   position: relative
@@ -57,10 +135,35 @@
     width: 50px
     position: absolute
 
+    i
+      position: relative
+      left: 16px
+      top: 10px
+
   .title
     position: relative
     font-size: 20px
     margin-left: 60px
+    display: inline-block
+
+  input
+    z-index: 2
+    position: relative
+    margin-left: 60px
+
+  i
+    display: inline-block
+    cursor: pointer
+    font-size: 20px
+    left: 5px
+    position: relative
+    top: 2px
+
+  .fa-pencil
+    top: 0px
+
+  i:hover
+    color: #EEE
 
   .count
     font-size: 12px
@@ -85,6 +188,7 @@
 
 .content
   padding: 20px
+  padding-top: 0px
 
 .crum
   display: inline-block
@@ -106,11 +210,9 @@
 .note
   min-height: 300px
   padding: 20px
-
   background: #fff
   border-radius: 2px
   display: inline-block
-  margin: 1rem
   position: relative
   width: 100%
   box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24)
@@ -121,11 +223,11 @@
   border-radius: 2px
   box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24)
   position: relative
-  margin: 1rem
   display: inline-block
   background: #fff
   padding: 20px
-  padding-top: 50px
+  border: 1px solid #999
+  outline: none
 
 .right
   text-align: right
@@ -140,8 +242,8 @@
       position: absolute
       cursor: pointer
       z-index: 1
-      top: 18px
-      left: 38px
+      top: 8px
+      right: 24px
 
     i:hover
       color: #666

@@ -30,48 +30,73 @@ module.exports = [
       $state.go 'login'
       return
 
-    $scope.noteToAdd =
-      title: ''
-
     $scope.note = null
     userId = TokenService.getUser()._id
 
     clean = (node) ->
       delete node.parent
+      if node.topics?
+        _.each node.topics, clean
+
+    migrate = (node) ->
       if node.notes?
-        _.each node.notes, clean
+        topics: node.notes.map (n) ->
+          m = migrate n
+          title: n.title
+          topics: m.topics
+          notes: [
+            n.markdown
+          ]
+        notes: [
+          node.markdown
+        ]
+      else
+        topics: []
+        notes: []
 
     UsersService.show userId
       .then (u) ->
+        if u.notes?
+          u.data = migrate u
+          delete u.notes
         $scope.user = u
-        $scope.current = u
+        $scope.user.data ?= {
+          notes: []
+          topics: []
+        }
+        $scope.current = u.data
         $scope.current.parent = null
 
     $scope.getColor = (index) ->
       colors[index % colors.length]
 
-    $scope.goto = (note) ->
-      while $scope.current isnt note
+    $scope.goto = (topic) ->
+      while $scope.current isnt topic
         back()
 
     $scope.save = ->
       $scope.editingNote = false
       toPut = _.cloneDeep $scope.user
-      clean toPut
+      clean toPut.data
       UsersService.put toPut
+
+    $scope.addTopic = ->
+      $scope.current.topics ?= []
+      $scope.current.topics.push
+        title: 'untitled'
+        editing: true
+      $scope.save()
 
     $scope.addNote = ->
       $scope.current.notes ?= []
-      $scope.noteToAdd.title = 'untitled'
-      $scope.current.notes.push $scope.noteToAdd
-      $scope.noteToAdd =
-        title: ''
-      $scope.save()
+      $scope.current.notes.push
+        markdown: 'Click to Write Note'
 
-    $scope.openNote = (note) ->
-      note.parent = $scope.current
-      $scope.current = note
-      $scope.bread.push note
+    $scope.openTopic = (topic) ->
+      topic.hovered = false
+      topic.parent = $scope.current
+      $scope.current = topic
+      $scope.bread.push topic
 
     $scope.logout = ->
       TokenService.setToken null

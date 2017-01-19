@@ -6,5 +6,4 @@ module.exports = new Schema
   email: String
   password: String
   salt: String
-  notes: Array
-  markdown: String
+  data: Object

@@ -1,10 +1,19 @@
+.header
+  .right
+    .logout
+      span(
+        ng-click="logout()"
+      )
+        i.fa.fa-sign-out
+        | Logout 
+
 .content
   .container-fluid
     .row
       .col-md-10
-        .card1.crums
+        .crums
           .crum(
-            ng-click="goto(user)"
+            ng-click="goto(user.data)"
           ) 
             .word Home
           
@@ -15,75 +24,112 @@
             i.fa.fa-caret-right
             .word {{crum.title}}
           
-      .col-md-2
-        .right
-          a(
-            href="#"
-            ng-click="logout()"
-          ) Logout
-        
     .row
       .col-md-3
-        .card1
-          .top
-            span(
-              ng-show="!editingTitle"
-            ) {{current.title || "Home"}}
-            input(
-              type="text"
-              ng-model="current.title"
-              ng-show="editingTitle"
+        div
+          //- .top
+          //-   span(
+          //-     ng-show="!editingTitle"
+          //-   ) {{current.title || "Home"}}
+          //-   input(
+          //-     type="text"
+          //-     ng-model="current.title"
+          //-     ng-show="editingTitle"
+          //-   )
+          //-   i.fa.fa-pencil(
+          //-     ng-click="editingTitle = true"
+          //-     ng-show="!editingTitle && current.title"
+          //-   )
+          //-   i.fa.fa-save(
+          //-     ng-click="editingTitle = false; save()"
+          //-     ng-show="editingTitle && current.title"
+          //-   )
+          .folders
+            .add
+              button
+                i.fa.fa-plus(
+                  ng-click="addTopic()"
+                ) 
+                | New Topic
+                
+            .empty(
+              ng-show="!current.topics.length || current.topics.length === 0"
             )
-            i.fa.fa-pencil(
-              ng-click="editingTitle = true"
-              ng-show="!editingTitle && current.title"
-            )
-            i.fa.fa-save(
-              ng-click="editingTitle = false; save()"
-              ng-show="editingTitle && current.title"
-            )
-          
-          .folder(
-            ng-click="openNote(note)"
-            ng-repeat="note in current.notes"
-            ng-style="{'background-color': getColor($index)}"
-          ) 
-            .tab(
-              ng-style="{'background-color': getColor($index)}"
-            )
-            .title {{note.title}}
-            .count {{note.notes.length || 0}}
-          
-          .add
-            i.fa.fa-plus(
-              ng-click="addNote()"
-            )
+              h5 There are no topics
             
-      .col-md-8.middle 
-        .title
-          i.fa.fa-pencil(
-            ng-click="editingNote = true"
-            ng-show="!editingNote"
-          )
-          i.fa.fa-save(
-            ng-click="editingNote = false; save()"
-            ng-show="editingNote"
-          )
-        
-        .note(
-          marked="current.markdown"
-          ng-show="!editingNote"
-        )
-        .wrapper
-          textarea.notearea(
-            ng-show="editingNote"
-            ng-model="current.markdown"
-          )
-        //- text-angular(
-        //-   id="note"
-        //-   ng-show="editingNote"
-        //-   ng-model="current.markdown"
-        //-   ta-toolbar="[['bold', 'italics', 'underline', 'strikeThrough', 'ul', 'ol', 'redo', 'undo']]"
-        //-   click-outside="editingNote = false; save()"
-        //-   outside-if-not="note-input"
-        //- )
+            .folder(
+              ng-click="openTopic(topic)"
+              ng-repeat="topic in current.topics"
+              ng-style="{'background-color': getColor($index)}"
+              ng-mouseover="topic.hovered = true"
+              ng-mouseleave="topic.hovered = false"
+            ) 
+              .tab(
+                ng-style="{'background-color': getColor($index)}"
+              )
+                i.fa.fa-bookmark-o
+              .title(
+                ng-click="topic.editing = true"
+                ng-show="!topic.editing"
+              ) {{topic.title}}
+              input(
+                type="text"
+                ng-show="topic.editing"
+                ng-model="topic.title"
+                ng-click="$event.stopPropagation();"
+              )
+              i.fa.fa-save(
+                ng-show="topic.editing"
+                ng-click="$event.stopPropagation(); topic.editing = false; save()"
+              )
+              i.fa.fa-pencil(
+                ng-show="topic.hovered && !topic.editing"
+                ng-click="$event.stopPropagation(); topic.editing = true"
+              )
+              .count {{topic.topics.length || 0}}
+          
+            
+      .col-md-9.middle
+        .row.toolbar
+          .col-md-12
+            .addNote
+              button
+                i.fa.fa-plus
+                | New Note
+              
+            .search
+              input(
+                type="text"
+                ng-model="search"
+                placeholder="search through your notes"
+              )
+              i.fa.fa-search
+        .row 
+          .notes 
+            .empty(
+              ng-show="!current.notes.length || current.notes.length === 0"
+            )
+              h5 There are no notes
+              
+            .col-md-4(
+              ng-repeat="note in current.notes"
+            )
+              .title
+                i.fa.fa-pencil(
+                  ng-click="note.editing = true"
+                  ng-show="!note.editing"
+                )
+                i.fa.fa-save(
+                  ng-click="note.editing = false; save()"
+                  ng-show="note.editing"
+                )
+              
+              .note(
+                marked="note.markdown"
+                ng-show="!note.editing"
+              )
+              .wrapper
+                textarea.notearea(
+                  ng-show="note.editing"
+                  ng-model="note.markdown"
+                )
