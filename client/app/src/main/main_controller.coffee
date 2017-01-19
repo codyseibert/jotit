@@ -45,10 +45,10 @@ module.exports = [
           title: n.title
           topics: m.topics
           notes: [
-            n.markdown
+            markdown: n.markdown
           ]
         notes: [
-          node.markdown
+          markdown: node.markdown
         ]
       else
         topics: []
