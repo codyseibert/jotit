@@ -87,8 +87,7 @@
                 ng-click="$event.stopPropagation(); topic.editing = true"
               )
               .count {{count(topic)}}
-          
-            
+
       .col-md-9.middle
         .row.toolbar
           .col-md-12
@@ -114,7 +113,7 @@
               h5 There are no notes
               
             .col-md-4(
-              ng-repeat="note in current.notes"
+              ng-repeat="note in current.notes | filter : noteFilter"
             )
               .title
                 i.fa.fa-pencil(
@@ -124,6 +123,9 @@
                 i.fa.fa-save(
                   ng-click="note.editing = false; save()"
                   ng-show="note.editing"
+                )
+                i.delete.fa.fa-trash(
+                  ng-click="deleteNote(note)"
                 )
               
               .note(

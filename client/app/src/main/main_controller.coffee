@@ -25,6 +25,7 @@ module.exports = [
     $scope.current = null
     $scope.editingNote = false
     $scope.bread = []
+    $scope.search = ''
 
     if not TokenService.getToken()?
       $state.go 'login'
@@ -77,11 +78,20 @@ module.exports = [
         editing: true
       $scope.save()
 
+    $scope.noteFilter = (note) ->
+      return true if not $scope.search? or $scope.search is ''
+      return note.markdown.indexOf($scope.search) isnt -1
+
     $scope.addNote = ->
       $scope.current.notes ?= []
       $scope.current.notes.push
         markdown: 'Click to Write Note'
       $scope.save()
+
+    $scope.deleteNote = (note) ->
+      y = confirm 'are you sure you want to delete this note?'
+      if y is true
+        $scope.current.notes.splice $scope.current.notes.indexOf(note), 1
 
     $scope.openTopic = (topic) ->
       topic.hovered = false
