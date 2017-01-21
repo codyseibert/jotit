@@ -32,6 +32,8 @@ module.exports = do ->
           res.status 401
           res.send 'invalid password'
 
+        user = _id: user._id
+
         jwt.sign user, TOKEN_PASSWORD, algorithm: 'HS256', (err, token) ->
           res.status 200
           res.send
