@@ -94,6 +94,12 @@
   color: white
   margin-bottom: 16px
 
+  button.delete
+    background-color: #e53935
+
+  button.delete:hover
+    background-color: #d52925
+
   button
     padding: 10px
     background-color: #00b0ff
@@ -207,8 +213,13 @@
 .crum .word:hover
   color: blue
 
+.wrapper
+  border-top: 4px solid green
+
 .note
-  min-height: 300px
+  height: 300px
+  margin-bottom: 20px
+  overflow: hidden
   padding: 20px
   background: #fff
   border-radius: 2px
@@ -233,6 +244,36 @@
 .right
   text-align: right
 
+.note-modal
+  position: fixed
+  z-index: 1
+  background-color: rgba(255, 255, 255, 0.7)
+  height: 100%
+  width: 100%
+  top: 0px
+  left: 0px
+
+  .inner
+    position: relative
+    top: 50%
+    transform: translateY(-50%)
+    margin: 0 auto
+    width: 50%
+    height: 70%
+    overflow-y: scroll
+    background-color: white
+    padding: 20px
+    border-top: 4px solid #ffa000
+
+    i
+      position: absolute
+      right: 20px
+      font-size: 20px
+      cursor: pointer
+
+    i:hover
+      color: #666
+
 .middle
   .title
     font-size: 30px
@@ -252,3 +293,7 @@
     i.delete
       top: 8px
       right: 60px
+
+    i.expand
+      top: 8px
+      right: 90px

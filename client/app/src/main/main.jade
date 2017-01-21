@@ -46,11 +46,18 @@
           //-   )
           .folders
             .add
-              button
-                i.fa.fa-plus(
-                  ng-click="addTopic()"
-                ) 
+              button(
+                ng-click="addTopic()"
+              )
+                i.fa.fa-plus
                 | New Topic
+                
+              button.delete(
+                ng-show="current.parent"
+                ng-click="deleteTopic(current)"
+              )
+                i.fa.fa-remove
+                | Delete Topic
                 
             .empty(
               ng-show="!current.topics.length || current.topics.length === 0"
@@ -127,13 +134,29 @@
                 i.delete.fa.fa-trash(
                   ng-click="deleteNote(note)"
                 )
+                i.expand.fa.fa-expand(
+                  ng-click="expand(note)"
+                )
               
               .note(
                 marked="note.markdown"
                 ng-show="!note.editing"
               )
-              .wrapper
+              .wrapper(
+                ng-show="note.editing"
+              )
                 textarea.notearea(
-                  ng-show="note.editing"
+                  ng-class="{'focus': note.focus}"
                   ng-model="note.markdown"
                 )
+                
+.note-modal(
+  ng-show="expanded"
+)
+  .inner
+    i.fa.fa-compress(
+      ng-click="compress()"
+    )
+    .expanded(
+      marked="expanded.markdown"
+    )

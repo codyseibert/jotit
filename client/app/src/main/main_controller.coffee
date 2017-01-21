@@ -1,12 +1,14 @@
 module.exports = [
   '$scope'
   '$state'
+  '$timeout'
   'UsersService'
   'TokenService'
   'lodash'
   (
     $scope
     $state
+    $timeout
     UsersService
     TokenService
     _
@@ -65,6 +67,12 @@ module.exports = [
       while $scope.current isnt topic
         back()
 
+    $scope.expand = (note) ->
+      $scope.expanded = note
+
+    $scope.compress = ->
+      $scope.expanded = null
+
     $scope.save = ->
       $scope.editingNote = false
       toPut = _.cloneDeep $scope.user
@@ -78,20 +86,35 @@ module.exports = [
         editing: true
       $scope.save()
 
+    $scope.deleteTopic = (topic) ->
+      y = confirm 'are you sure you want to delete this topic?'
+      if y is true
+        back()
+        $scope.current.topics.splice $scope.current.topics.indexOf(topic), 1
+        $scope.save()
+
     $scope.noteFilter = (note) ->
       return true if not $scope.search? or $scope.search is ''
       return note.markdown.indexOf($scope.search) isnt -1
 
     $scope.addNote = ->
       $scope.current.notes ?= []
-      $scope.current.notes.push
-        markdown: 'Click to Write Note'
+      note =
+        markdown: ''
+        editing: true
+        focus: true
+      $scope.current.notes.unshift note
       $scope.save()
+      $timeout ->
+        elm = angular.element(document.querySelectorAll('.focus'))[0]
+        elm.focus()
+        note.focus = false
 
     $scope.deleteNote = (note) ->
       y = confirm 'are you sure you want to delete this note?'
       if y is true
         $scope.current.notes.splice $scope.current.notes.indexOf(note), 1
+        $scope.save()
 
     $scope.openTopic = (topic) ->
       topic.hovered = false
