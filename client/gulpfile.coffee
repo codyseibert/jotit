@@ -73,6 +73,7 @@ gulp.task 'replace', ['coffee'], ->
   if isProduction
     gulp.src(['tmp/js/app.js'])
       .pipe(replace('http://localhost:8081', 'http://jotitapi.seibertsoftwaresolutions.com'))
+      .pipe(replace('jotit-dev', 'jotit-prod'))
       .pipe(gulp.dest('tmp/js'))
 
 gulp.task 'connect', ->

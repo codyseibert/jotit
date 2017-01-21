@@ -38,7 +38,7 @@ app.config [
     localStorageServiceProvider
   ) ->
     localStorageServiceProvider
-      .setPrefix 'jotit'
+      .setPrefix 'jotit-dev'
 ]
 
 app.config ['$httpProvider', ($httpProvider) ->
