@@ -101,7 +101,7 @@
         .row.toolbar
           .col-md-12
             .addNote(
-              ng-show="!showCalendar"
+              ng-show="showPanel === 'notes'"
             )
               button(
                 ng-click="addNote()"
@@ -110,7 +110,7 @@
                 | New Note
               
             .search(
-              ng-show="!showCalendar"
+              ng-show="showPanel === 'notes'"
             )
               input(
                 type="text"
@@ -121,22 +121,50 @@
               
             .showNotes
               button(
-                ng-show="showCalendar"
-                ng-click="showCalendar = false"
+                ng-show="showPanel !== 'notes'"
+                ng-click="showPanel = 'notes'"
               )
                 i.fa.fa-sticky-note
                 | Notes
                 
             .showCalendar
               button(
-                ng-show="!showCalendar"
-                ng-click="showCalendar = true"
+                ng-show="showPanel !== 'calendar'"
+                ng-click="showPanel = 'calendar'"
               )
                 i.fa.fa-calendar
                 | Calendar
+                
+            .showTags
+              button(
+                ng-show="showPanel !== 'tags'"
+                ng-click="showPanel = 'tags'"
+              )
+                i.fa.fa-tags
+                | Tags
+                
+        .row(
+          ng-show="showPanel === 'tags'"
+        )
+          div(
+            ng-show="tagKeys.length === 0"
+          ) You have no tags
+          
+          .row.tags(
+            ng-repeat="tagKey in tagKeys"
+          )
+            .col-md-2
+              .tag {{tagKey}}
+            
+            .col-md-10
+              .tagnote(
+                ng-repeat="note in tags[tagKey]"
+                marked="note.markdown"
+                ng-click="expand(note)"
+              )
         
         .row(
-          ng-show="showCalendar"
+          ng-show="showPanel === 'calendar'"
         )
           .calendar(
             ui-calendar="uiConfig.calendar"
@@ -144,7 +172,7 @@
           )
 
         .row(
-          ng-show="!showCalendar"
+          ng-show="showPanel === 'notes'"
         )
           .notes 
             .empty(

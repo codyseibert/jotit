@@ -1,3 +1,19 @@
+button
+  padding: 10px
+  background-color: rgb(255, 114, 160)
+  border: none
+  color: white
+  width: 120px
+  margin-right: 10px
+
+button:hover
+  background-color: rgb(255, 114, 160)
+
+i
+  cursor: pointer
+  position: relative
+  margin-right: 5px
+
 .header
   width: 100%
   height: 50px
@@ -56,19 +72,26 @@
 
   button
     padding: 10px
-    background-color: rgb(255, 114, 160)
+    background-color: #ffa000
     border: none
     color: white
     width: 120px
     margin-right: 10px
 
   button:hover
-    background-color: rgb(255, 114, 160)
+    background-color: #ffa000
 
   i
     cursor: pointer
     position: relative
     margin-right: 5px
+
+.showTags
+  float: right
+  display: inline-block
+
+  button
+    background-color: rgb(86, 95, 200)
 
 .showCalendar
   float: right
@@ -357,3 +380,23 @@
     i.expand
       top: 8px
       right: 90px
+
+
+.tags
+  margin-bottom: 20px
+
+  .tag
+    font-size: 18px
+    font-weight: bold
+    padding: 10px
+
+  .tagnote
+    padding: 10px
+    margin-right: 20px
+    cursor: pointer
+    overflow-y: scroll
+    width: 200px
+    display: inline-block
+    height: 200px
+    background-color: white
+    border-top: 4px solid #ffa000

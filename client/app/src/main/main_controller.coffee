@@ -28,21 +28,18 @@ module.exports = [
 
     $scope.uiConfig =
       calendar:
-        # height: 450
-        # editable: true
-        # header:
-          # left: 'month basicWeek basicDay agendaWeek agendaDay'
-          # center: 'title'
-          # right: 'today prev,next'
         eventClick: $scope.alertEventOnClick
-        # eventDrop: $scope.alertOnDrop
-        # eventResize: $scope.alertOnResize
 
     events = []
+
+    $scope.tagKeys = []
+    $scope.tags = {}
 
     $scope.eventSources = [
       events: events
     ]
+
+    $scope.showPanel = 'notes'
 
     $scope.user = null
     $scope.current = null
@@ -96,6 +93,35 @@ module.exports = [
       for e in evts
         events.push e
 
+    getTags = (node) ->
+      tags = {}
+
+      if node.notes?
+        for note in node.notes
+          continue if not note?
+          re = /#[0-9a-zA-Z]+/g
+          while (result = re.exec(note.markdown))
+            tag = result[0]
+            tags[tag] ?= []
+            tags[tag].push note
+
+      if node.topics?
+        _.each node.topics, (t) ->
+          ex = getTags t
+          for k, v of ex
+            tags[k] ?= []
+            for n in v
+              tags[k].push n
+
+      tags
+
+    refreshTags = ->
+      tags = getTags $scope.current
+      $scope.tagKeys = Object.keys tags
+      $scope.tags = {}
+      for k, v of tags
+        $scope.tags[k] = v
+
     UsersService.show userId
       .then (u) ->
         $scope.user = u
@@ -106,6 +132,7 @@ module.exports = [
         $scope.current = u.data
         $scope.current.parent = null
         refreshEvents()
+        refreshTags()
 
     $scope.getColor = (index) ->
       colors[index % colors.length]
@@ -126,6 +153,7 @@ module.exports = [
       clean toPut.data
       UsersService.put toPut
       refreshEvents()
+      refreshTags()
 
     $scope.addTopic = ->
       $scope.current.topics ?= []
@@ -170,6 +198,7 @@ module.exports = [
       $scope.current = topic
       $scope.bread.push topic
       refreshEvents()
+      refreshTags()
 
     $scope.logout = ->
       TokenService.setToken null
@@ -180,6 +209,7 @@ module.exports = [
       $scope.current = $scope.current.parent
       $scope.bread.splice $scope.bread.length - 1, 1
       refreshEvents()
+      refreshTags()
 
     return this
 ]
