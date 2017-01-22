@@ -50,6 +50,46 @@
 .toolbar
   margin-bottom: 14px
 
+.showNotes
+  float: right
+  display: inline-block
+
+  button
+    padding: 10px
+    background-color: rgb(255, 114, 160)
+    border: none
+    color: white
+    width: 120px
+    margin-right: 10px
+
+  button:hover
+    background-color: rgb(255, 114, 160)
+
+  i
+    cursor: pointer
+    position: relative
+    margin-right: 5px
+
+.showCalendar
+  float: right
+  display: inline-block
+
+  button
+    padding: 10px
+    background-color: rgb(255, 114, 160)
+    border: none
+    color: white
+    width: 120px
+    margin-right: 10px
+
+  button:hover
+    background-color: rgb(255, 114, 160)
+
+  i
+    cursor: pointer
+    position: relative
+    margin-right: 5px
+
 .addNote
   display: inline-block
 
@@ -174,9 +214,23 @@
   .count
     font-size: 12px
     position: absolute
-    top: 13px
+    top: 10px
     right: 14px
     color: #fee
+
+    .circle
+      border-radius: 50px
+      width: 20px
+      height: 20px
+      background-color: rgba(255, 255, 255, 0.9)
+      position: relative
+      top: 0px
+
+    span
+      position: relative
+      top: -18px
+      left: 7px
+      color: #666
 
 .folder:hover
   color: #FFF
@@ -228,6 +282,7 @@
   width: 100%
   border-top: 4px solid #ffa000
   box-shadow: 0 3px 5px rgba(0,0,0,0.12), 0 3px 5px rgba(0,0,0,0.24)
+  overflow-y: auto
 
 .notearea
   width: 100%
@@ -273,6 +328,11 @@
 
     i:hover
       color: #666
+
+.calendar
+  width: 80%
+  padding: 40px
+  background-color: white
 
 .middle
   .title

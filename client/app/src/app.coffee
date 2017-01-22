@@ -1,3 +1,5 @@
+window.$ = require 'jquery'
+window.moment = require 'moment'
 angular = require 'angular'
 require 'angular-scroll'
 require 'angular-filter'
@@ -9,6 +11,8 @@ require '../../node_modules/textangular/dist/textAngular-sanitize.min'
 require '../../node_modules/textangular/dist/textAngular.min'
 require 'ng-file-upload'
 require 'angular-marked'
+require 'fullcalendar'
+require 'angular-ui-calendar'
 require '@iamadamjowett/angular-click-outside'
 
 app = require('angular').module('jotit', [
@@ -23,6 +27,7 @@ app = require('angular').module('jotit', [
   'ngLodash'
   'ui.bootstrap'
   'hc.marked'
+  'ui.calendar'
   require 'angular-moment'
 ])
 

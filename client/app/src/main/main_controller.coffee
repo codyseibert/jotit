@@ -23,6 +23,27 @@ module.exports = [
       '#00c5c6'
     ]
 
+    $scope.alertEventOnClick = (event) ->
+      console.log event
+
+    $scope.uiConfig =
+      calendar:
+        # height: 450
+        # editable: true
+        # header:
+          # left: 'month basicWeek basicDay agendaWeek agendaDay'
+          # center: 'title'
+          # right: 'today prev,next'
+        eventClick: $scope.alertEventOnClick
+        # eventDrop: $scope.alertOnDrop
+        # eventResize: $scope.alertOnResize
+
+    events = []
+
+    $scope.eventSources = [
+      events: events
+    ]
+
     $scope.user = null
     $scope.current = null
     $scope.editingNote = false
@@ -50,6 +71,30 @@ module.exports = [
       if node.topics?
         _.each node.topics, clean
 
+    getEvents = (node) ->
+      evts = []
+      if node.notes?
+        for e in node.notes
+          re = /[0-9]+\/[0-9]+\/[0-9]+/
+          result = re.exec e.markdown
+          if result?
+            evts.push
+              title: e.markdown.substring 0, 16
+              start: result[0].replace '/', '-'
+              note: e
+      if node.topics?
+        _.each node.topics, (t) ->
+          ex = getEvents t
+          for e in ex
+            evts.push e
+      evts
+
+    refreshEvents = ->
+      evts = getEvents $scope.current
+      events.splice 0, events.length
+      for e in evts
+        events.push e
+
     UsersService.show userId
       .then (u) ->
         $scope.user = u
@@ -59,6 +104,7 @@ module.exports = [
         }
         $scope.current = u.data
         $scope.current.parent = null
+        refreshEvents()
 
     $scope.getColor = (index) ->
       colors[index % colors.length]
@@ -78,6 +124,7 @@ module.exports = [
       toPut = _.cloneDeep $scope.user
       clean toPut.data
       UsersService.put toPut
+      refreshEvents()
 
     $scope.addTopic = ->
       $scope.current.topics ?= []
@@ -121,6 +168,7 @@ module.exports = [
       topic.parent = $scope.current
       $scope.current = topic
       $scope.bread.push topic
+      refreshEvents()
 
     $scope.logout = ->
       TokenService.setToken null
@@ -130,6 +178,7 @@ module.exports = [
     back = ->
       $scope.current = $scope.current.parent
       $scope.bread.splice $scope.bread.length - 1, 1
+      refreshEvents()
 
     return this
 ]

@@ -93,26 +93,59 @@
                 ng-show="topic.hovered && !topic.editing"
                 ng-click="$event.stopPropagation(); topic.editing = true"
               )
-              .count {{count(topic)}}
+              .count 
+                .circle 
+                span {{count(topic)}}
 
       .col-md-9.middle
         .row.toolbar
           .col-md-12
-            .addNote
+            .addNote(
+              ng-show="!showCalendar"
+            )
               button(
                 ng-click="addNote()"
               )
                 i.fa.fa-plus
                 | New Note
               
-            .search
+            .search(
+              ng-show="!showCalendar"
+            )
               input(
                 type="text"
                 ng-model="search"
                 placeholder="search through your notes"
               )
               i.fa.fa-search
-        .row 
+              
+            .showNotes
+              button(
+                ng-show="showCalendar"
+                ng-click="showCalendar = false"
+              )
+                i.fa.fa-sticky-note
+                | Notes
+                
+            .showCalendar
+              button(
+                ng-show="!showCalendar"
+                ng-click="showCalendar = true"
+              )
+                i.fa.fa-calendar
+                | Calendar
+        
+        .row(
+          ng-show="showCalendar"
+        )
+          .calendar(
+            ui-calendar="uiConfig.calendar"
+            ng-model="eventSources"
+          )
+
+        .row(
+          ng-show="!showCalendar"
+        )
           .notes 
             .empty(
               ng-show="!current.notes.length || current.notes.length === 0"
