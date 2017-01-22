@@ -75,6 +75,7 @@ module.exports = [
       evts = []
       if node.notes?
         for e in node.notes
+          continue if not e?
           re = /[0-9]+\/[0-9]+\/[0-9]+/
           result = re.exec e.markdown
           if result?
