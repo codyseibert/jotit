@@ -82,7 +82,7 @@ module.exports = [
       $scope.labels.splice 0, $scope.labels.length
       $scope.data[0].splice 0, $scope.data[0].length
       name = $scope.search
-      
+
       if pts[name]?
         $scope.data[0] = pts[name].sort (a, b) ->
           moment(a.start).isAfter(moment(b.start))
@@ -100,7 +100,10 @@ module.exports = [
 
     $scope.$watch 'search', (newValue, oldValue) ->
       if $scope.current?
+        # TODO: Only do it if we are displaying that panel
         reloadCharts()
+        refreshEvents()
+        refreshTags()
 
     $scope.user = null
     $scope.current = null
@@ -133,6 +136,8 @@ module.exports = [
       if node.notes?
         for e in node.notes
           continue if not e?
+          if $scope.search isnt ''
+            continue if e.markdown.indexOf($scope.search) is -1
           re = /[0-9]+\/[0-9]+\/[0-9]+/
           result = re.exec e.markdown
           if result?
@@ -159,6 +164,8 @@ module.exports = [
       if node.notes?
         for note in node.notes
           continue if not note?
+          if $scope.search isnt ''
+            continue if note.markdown.indexOf($scope.search) is -1
           re = /#[0-9a-zA-Z]+/g
           while (result = re.exec(note.markdown))
             tag = result[0]
@@ -174,6 +181,22 @@ module.exports = [
               tags[k].push n
 
       tags
+
+    $scope.getNotes = (node) ->
+      notes = []
+
+      if node?.notes?
+        for note in node.notes
+          continue if not note?
+          notes.push note
+
+      if node?.topics?
+        _.each node.topics, (t) ->
+          ex = $scope.getNotes t
+          for n in ex
+            notes.push n
+
+      notes
 
     refreshTags = ->
       tags = getTags $scope.current
@@ -194,6 +217,8 @@ module.exports = [
         refreshEvents()
         refreshTags()
         reloadCharts()
+
+    $scope.reloadCharts = reloadCharts
 
     $scope.getColor = (index) ->
       colors[index % colors.length]
@@ -257,10 +282,19 @@ module.exports = [
         elm.focus()
         note.focus = false
 
+    deleteNote = (node, note) ->
+      if node?.notes?
+        if node.notes.indexOf(note) isnt -1
+          node.notes.splice node.notes.indexOf(note), 1
+
+      if node?.topics?
+        _.each node.topics, (t) ->
+          deleteNote t, note
+
     $scope.deleteNote = (note) ->
       y = confirm 'are you sure you want to delete this note?'
       if y is true
-        $scope.current.notes.splice $scope.current.notes.indexOf(note), 1
+        deleteNote $scope.current, note
         $scope.save()
 
     $scope.openTopic = (topic) ->

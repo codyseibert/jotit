@@ -27,23 +27,6 @@
     .row
       .col-md-3
         div
-          //- .top
-          //-   span(
-          //-     ng-show="!editingTitle"
-          //-   ) {{current.title || "Home"}}
-          //-   input(
-          //-     type="text"
-          //-     ng-model="current.title"
-          //-     ng-show="editingTitle"
-          //-   )
-          //-   i.fa.fa-pencil(
-          //-     ng-click="editingTitle = true"
-          //-     ng-show="!editingTitle && current.title"
-          //-   )
-          //-   i.fa.fa-save(
-          //-     ng-click="editingTitle = false; save()"
-          //-     ng-show="editingTitle && current.title"
-          //-   )
           .folders
             .add
               button(
@@ -121,18 +104,18 @@
               )
                 i.fa.fa-plus
                 | New Note
-              
-            .showNotes
+                
+            .showAnalytics
               button(
-                ng-show="showPanel !== 'notes'"
-                ng-click="showPanel = 'notes'"
+                ng-class="{'selected': showPanel === 'analytics'}"
+                ng-click="showPanel = 'analytics'; reloadCharts();"
               )
-                i.fa.fa-sticky-note
-                | Notes
+                i.fa.fa-line-chart
+                | Analytics
                 
             .showCalendar
               button(
-                ng-show="showPanel !== 'calendar'"
+                ng-class="{'selected': showPanel === 'calendar'}"
                 ng-click="showPanel = 'calendar'"
               )
                 i.fa.fa-calendar
@@ -140,19 +123,20 @@
                 
             .showTags
               button(
-                ng-show="showPanel !== 'tags'"
+                ng-class="{'selected': showPanel === 'tags'}"
                 ng-click="showPanel = 'tags'"
               )
                 i.fa.fa-tags
                 | Tags
                 
-            .showAnalytics
+            .showNotes
               button(
-                ng-show="showPanel !== 'analytics'"
-                ng-click="showPanel = 'analytics'; refreshCharts();"
+                ng-class="{'selected': showPanel === 'notes'}"
+                ng-click="showPanel = 'notes'"
               )
-                i.fa.fa-line-chart
-                | Analytics
+                i.fa.fa-sticky-note
+                | Notes
+                
                 
         .row(
           ng-show="showPanel === 'tags'"
@@ -197,19 +181,19 @@
             
           div(
             ng-show="!labels.length"
-          ) No data matches <b>{{search}}</b>
+          ) Use the search bar above to generate charts for any note in this topic which has both a date and quantity in the markdown.  The date must be in the format of "1/1/2001", and the quantity must be in the format of "fun(5)".
 
         .row(
           ng-show="showPanel === 'notes'"
         )
           .notes 
             .empty(
-              ng-show="!current.notes.length || current.notes.length === 0"
+              ng-show="!getNotes(current).length"
             )
               h5 There are no notes
               
             .col-md-4(
-              ng-repeat="note in current.notes | filter : noteFilter"
+              ng-repeat="note in getNotes(current) | filter : noteFilter"
             )
               .title
                 i.fa.fa-pencil(
@@ -231,7 +215,7 @@
                 marked="note.markdown"
                 ng-show="!note.editing"
               )
-              .wrapper(
+              .greentop(
                 ng-show="note.editing"
               )
                 textarea.notearea(
