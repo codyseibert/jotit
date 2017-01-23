@@ -41,6 +41,67 @@ module.exports = [
 
     $scope.showPanel = 'notes'
 
+    $scope.labels = ["January", "February", "March", "April", "May", "June", "July"]
+    $scope.series = ['Values']
+    $scope.data = [
+      [65, 59, 80, 81, 56, 55, 40]
+    ]
+
+    chart = null
+    onChartCreated = (event, newValue) ->
+      chart = newValue
+    $scope.$on 'create', onChartCreated
+
+    getPoints = (node) ->
+      points = {}
+      if node.notes?
+        for e in node.notes
+          continue if not e?
+          re = /([a-zA-Z0-9]+)\(([0-9]+)\)/
+          dateRe = /[0-9]+\/[0-9]+\/[0-9]+/
+          result = re.exec e.markdown
+          dateResult = dateRe.exec e.markdown
+          if result? and dateResult?
+            name = result[1]
+            points[name] ?= []
+            points[name].push
+              count: parseInt result[2]
+              start: dateResult[0]
+
+      if node.topics?
+        _.each node.topics, (t) ->
+          ex = getPoints t
+          for k, v of ex
+            points[k] ?= []
+            for n in v
+              points[k].push n
+      points
+
+    reloadCharts = ->
+      pts = getPoints $scope.current
+      $scope.labels.splice 0, $scope.labels.length
+      $scope.data[0].splice 0, $scope.data[0].length
+      name = $scope.search
+      
+      if pts[name]?
+        $scope.data[0] = pts[name].sort (a, b) ->
+          moment(a.start).isAfter(moment(b.start))
+        .map (x) ->
+          x.count
+
+        $scope.labels = pts[name].sort (a, b) ->
+          moment(a.start).isAfter(moment(b.start))
+        .map (x) ->
+          x.start
+
+        $timeout ->
+          chart.resize()
+
+
+    $scope.$watch 'search', (newValue, oldValue) ->
+      if $scope.current?
+        reloadCharts()
+
     $scope.user = null
     $scope.current = null
     $scope.bread = []
@@ -132,9 +193,14 @@ module.exports = [
         $scope.current.parent = null
         refreshEvents()
         refreshTags()
+        reloadCharts()
 
     $scope.getColor = (index) ->
       colors[index % colors.length]
+
+    $scope.refreshCharts = ->
+      $timeout ->
+        window.dispatchEvent new Event('resize')
 
     $scope.goto = (topic) ->
       while $scope.current isnt topic
@@ -152,6 +218,7 @@ module.exports = [
       UsersService.put toPut
       refreshEvents()
       refreshTags()
+      reloadCharts()
 
     $scope.addTopic = ->
       $scope.current.topics ?= []
@@ -203,6 +270,7 @@ module.exports = [
       $scope.bread.push topic
       refreshEvents()
       refreshTags()
+      reloadCharts()
 
     $scope.logout = ->
       TokenService.setToken null
@@ -214,6 +282,7 @@ module.exports = [
       $scope.bread.splice $scope.bread.length - 1, 1
       refreshEvents()
       refreshTags()
+      reloadCharts()
 
     return this
 ]

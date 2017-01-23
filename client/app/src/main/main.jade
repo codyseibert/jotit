@@ -104,6 +104,15 @@
       .col-md-9.middle
         .row.toolbar
           .col-md-12
+          
+            .search
+              input(
+                type="text"
+                ng-model="search"
+                placeholder="search through your notes"
+              )
+              i.fa.fa-search
+              
             .addNote(
               ng-show="showPanel === 'notes'"
             )
@@ -112,16 +121,6 @@
               )
                 i.fa.fa-plus
                 | New Note
-              
-            .search(
-              ng-show="showPanel === 'notes'"
-            )
-              input(
-                type="text"
-                ng-model="search"
-                placeholder="search through your notes"
-              )
-              i.fa.fa-search
               
             .showNotes
               button(
@@ -146,6 +145,14 @@
               )
                 i.fa.fa-tags
                 | Tags
+                
+            .showAnalytics
+              button(
+                ng-show="showPanel !== 'analytics'"
+                ng-click="showPanel = 'analytics'; refreshCharts();"
+              )
+                i.fa.fa-line-chart
+                | Analytics
                 
         .row(
           ng-show="showPanel === 'tags'"
@@ -174,6 +181,23 @@
             ui-calendar="uiConfig.calendar"
             ng-model="eventSources"
           )
+          
+        .row(
+          ng-show="showPanel === 'analytics'"
+        )   
+          .ch(
+            ng-show="labels.length"
+          )
+            canvas.chart.chart-line(
+              chart-data="data" 
+              chart-labels="labels" 
+              chart-series="series" 
+              chart-click="onClick"
+            )
+            
+          div(
+            ng-show="!labels.length"
+          ) No data matches <b>{{search}}</b>
 
         .row(
           ng-show="showPanel === 'notes'"
