@@ -24,7 +24,7 @@ module.exports = [
     ]
 
     $scope.alertEventOnClick = (event) ->
-      console.log event
+      $scope.expanded = event.note
 
     $scope.uiConfig =
       calendar:
@@ -43,7 +43,6 @@ module.exports = [
 
     $scope.user = null
     $scope.current = null
-    $scope.editingNote = false
     $scope.bread = []
     $scope.search = ''
 
@@ -148,7 +147,6 @@ module.exports = [
       $scope.expanded = null
 
     $scope.save = ->
-      $scope.editingNote = false
       toPut = _.cloneDeep $scope.user
       clean toPut.data
       UsersService.put toPut
@@ -157,9 +155,15 @@ module.exports = [
 
     $scope.addTopic = ->
       $scope.current.topics ?= []
-      $scope.current.topics.push
-        title: 'untitled'
+      topic =
+        title: ''
         editing: true
+        focus: true
+      $scope.current.topics.push topic
+      $timeout ->
+        elm = angular.element(document.querySelectorAll('.topic.focus'))[0]
+        elm.focus()
+        topic.focus = false
       $scope.save()
 
     $scope.deleteTopic = (topic) ->

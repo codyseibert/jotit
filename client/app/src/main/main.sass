@@ -159,6 +159,7 @@ i
 
   button.delete
     background-color: #e53935
+    width: 130px
 
   button.delete:hover
     background-color: #d52925
@@ -255,6 +256,9 @@ i
       left: 7px
       color: #666
 
+    span.double
+      left: 5px
+
 .folder:hover
   color: #FFF
   background-color: blue
@@ -319,13 +323,24 @@ i
   border: 1px solid #999
   outline: none
 
+.ex
+  width: 100%
+  min-height: 300px
+  border-radius: 2px
+  position: relative
+  display: inline-block
+  background: #fff
+  padding: 20px
+  border: 1px solid #999
+  outline: none
+
 .right
   text-align: right
 
 .note-modal
   position: fixed
   z-index: 1
-  background-color: rgba(255, 255, 255, 0.7)
+  background-color: rgba(0, 0, 0, 0.4)
   height: 100%
   width: 100%
   top: 0px
@@ -343,7 +358,11 @@ i
     padding: 20px
     border-top: 4px solid #ffa000
 
+    textarea
+      margin-top: 40px
+
     i
+      z-index: 5
       position: absolute
       right: 20px
       font-size: 20px
@@ -351,6 +370,12 @@ i
 
     i:hover
       color: #666
+
+    .fa-save
+      right: 50px
+
+    .fa-pencil
+      right: 50px
 
 .calendar
   width: 80%
@@ -368,18 +393,18 @@ i
       cursor: pointer
       z-index: 1
       top: 8px
-      right: 24px
+      right: 90px
 
     i:hover
       color: #666
 
     i.delete
       top: 8px
-      right: 60px
+      right: 24px
 
     i.expand
       top: 8px
-      right: 90px
+      right: 60px
 
 
 .tags
@@ -400,3 +425,7 @@ i
     height: 200px
     background-color: white
     border-top: 4px solid #ffa000
+    margin-bottom: 10px
+
+.fc-content
+  cursor: pointer

@@ -79,11 +79,13 @@
                 ng-click="topic.editing = true"
                 ng-show="!topic.editing"
               ) {{topic.title}}
-              input(
+              input.topic(
                 type="text"
                 ng-show="topic.editing"
                 ng-model="topic.title"
                 ng-click="$event.stopPropagation();"
+                ng-class="{'focus': topic.focus}"
+                ng-enter="$event.stopPropagation(); topic.editing = false; save()"
               )
               i.fa.fa-save(
                 ng-show="topic.editing"
@@ -95,7 +97,9 @@
               )
               .count 
                 .circle 
-                span {{count(topic)}}
+                span(
+                  ng-class="{'double': count(topic) > 9}"
+                ) {{count(topic)}}
 
       .col-md-9.middle
         .row.toolbar
@@ -218,6 +222,22 @@
     i.fa.fa-compress(
       ng-click="compress()"
     )
-    .expanded(
-      marked="expanded.markdown"
+    i.fa.fa-save(
+      ng-show="expanded.editing"
+      ng-click="save(); expanded.editing = false"
     )
+    i.fa.fa-pencil(
+      ng-show="!expanded.editing"
+      ng-click="expanded.editing = true"
+    )
+    .wrap
+      .expanded(
+        ng-show="!expanded.editing"
+        marked="expanded.markdown"
+      )
+      div(
+        ng-show="expanded.editing"
+      )
+        textarea.ex(
+          ng-model="expanded.markdown"
+        )

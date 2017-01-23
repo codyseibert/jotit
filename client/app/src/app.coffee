@@ -55,6 +55,18 @@ require './login'
 
 app.constant 'API_PATH', 'http://localhost:8081'
 
+app.directive 'ngEnter', ->
+  (scope, element, attrs) ->
+    element.bind 'keydown keypress', (event) ->
+      if event.which == 13
+        scope.$apply ->
+          scope.$eval attrs.ngEnter, 'event': event
+          return
+        event.preventDefault()
+      return
+    return
+
+
 app.run [
   (
   ) ->
