@@ -15,12 +15,18 @@ module.exports = [
   ) ->
 
     colors = [
-      '#ff72a0'
-      '#565fc8'
-      '#ff9000'
-      '#78cb0b'
-      '#1aacf7'
-      '#00c5c6'
+      '#EBC9D9'
+      '#E57C6C'
+      '#495872'
+      '#4174A6'
+      '#99CFE0'
+      '#D6E5D8'
+      '#CAD8E7'
+      '#95A5C3'
+      '#91677E'
+      '#E65D6E'
+      '#FE9E95'
+      '#FEDAB3'
     ]
 
     $scope.alertEventOnClick = (event) ->
