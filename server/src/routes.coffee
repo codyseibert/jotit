@@ -47,19 +47,19 @@ module.exports = do ->
       scope: ['email']
 
   app.get '/login/facebook/callback',
-    passport.authenticate 'facebook',
-      successRedirect: 'http://jotit.seibertsoftwaresolutions.com'
+    passport.authenticate('facebook',
       failureRedirect: 'http://jotit.seibertsoftwaresolutions.com'
       session: false
-    # , (req, res) ->
-    #   console.log 'here user', req.user
-    #   User.findOne(fbAccessToken: req.user.access_token).then (u) ->
-    #     if u?
-    #       jwt.sign u, TOKEN_PASSWORD, algorithm: 'HS256', (err, token) ->
-    #         res.redirect "http://jotit.seibertsoftwaresolutions.com?t=#{token}"
-    #     else
-    #       res.status 400
-    #       res.send 'user not found'
+    )
+    , (req, res) ->
+      console.log 'here user', req.user
+      User.findOne(fbAccessToken: req.user.access_token).then (u) ->
+        if u?
+          jwt.sign u, TOKEN_PASSWORD, algorithm: 'HS256', (err, token) ->
+            res.redirect "http://jotit.seibertsoftwaresolutions.com?t=#{token}"
+        else
+          res.status 400
+          res.send 'user not found'
 
   app.post '/login', LoginCtrl.post
 
