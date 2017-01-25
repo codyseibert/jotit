@@ -12,6 +12,7 @@ models = require './models/models'
 Users = models.Users
 ObjectId = require('mongoose').Types.ObjectId
 _ = require 'lodash'
+jwt = require 'jsonwebtoken'
 
 config = require './config/config'
 TOKEN_PASSWORD = config.JWT_PASSWORD
