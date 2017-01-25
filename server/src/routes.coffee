@@ -22,20 +22,17 @@ passport.use new FacebookStrategy
   callbackURL: 'http://jotitapi.seibertsoftwaresolutions.com/login/facebook/callback'
   profileFields: ['email', 'id']
 , (accessToken, refreshToken, profile, cb) ->
-  console.log 'yo'
   Users.findOne(fbId: profile.id).then (u) ->
     if u?
       cb null, u
     else
-      console.log 'creating user'
       user =
         fbId: profile.id
         fbAccessToken: accessToken
         email: profile.emails[0].value
       Users.create(user).then (obj) ->
-        console.log 'user created'
         if obj?
-          cb null, obj?
+          cb null, obj
         else
           cb 'error creating the user'
 
@@ -53,13 +50,12 @@ module.exports = do ->
     )
     , (req, res) ->
       console.log 'here user', req.user
-      User.findOne(fbAccessToken: req.user.access_token).then (u) ->
-        if u?
-          jwt.sign u, TOKEN_PASSWORD, algorithm: 'HS256', (err, token) ->
-            res.redirect "http://jotit.seibertsoftwaresolutions.com?t=#{token}"
-        else
-          res.status 400
-          res.send 'user not found'
+      if req.user?
+        jwt.sign _id: req.user._id, TOKEN_PASSWORD, algorithm: 'HS256', (err, token) ->
+          res.redirect "http://jotit.seibertsoftwaresolutions.com?t=#{token}"
+      else
+        res.status 400
+        res.send 'user not found'
 
   app.post '/login', LoginCtrl.post
 
