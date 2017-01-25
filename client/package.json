@@ -24,6 +24,7 @@
     "angular-filter": "^0.5.8",
     "angular-intro.js": "^2.0.3",
     "angular-inview": "^2.0.0",
+    "angular-jwt": "^0.1.9",
     "angular-local-storage": "^0.2.7",
     "angular-marked": "^1.2.2",
     "angular-masonry": "^0.16.0",

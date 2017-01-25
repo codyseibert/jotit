@@ -15,6 +15,7 @@ require 'fullcalendar'
 require 'angular-ui-calendar'
 require '@iamadamjowett/angular-click-outside'
 require 'angular-chart.js'
+require 'angular-jwt'
 
 app = require('angular').module('jotit', [
   require 'angular-ui-router'
@@ -30,6 +31,7 @@ app = require('angular').module('jotit', [
   'hc.marked'
   'ui.calendar'
   'chart.js'
+  'angular-jwt'
   require 'angular-moment'
 ])
 
