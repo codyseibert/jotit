@@ -1,19 +1,29 @@
-.container-fluid
-  .row
-    .col-md-4.col-md-push-4
-      form
-        input(
-          ng-model="email"
-          type="email"
-          placeholder="email"
+#login
+  .container-fluid
+    .row
+      .col-md-4.col-md-push-4
+      
+        button.login(
+          ng-click="loginWithFacebook()"
         )
+          i.fa.fa-facebook
+          | Login with Facebook
+          
+        div or 
         
-        input(
-          ng-model="password"
-          type="password"
-        )
-        
-        button(
-          type="submit"
-          ng-click="login()"
-        ) Login
+        form
+          input(
+            ng-model="email"
+            type="email"
+            placeholder="email"
+          )
+          
+          input(
+            ng-model="password"
+            type="password"
+          )
+          
+          button(
+            type="submit"
+            ng-click="login()"
+          ) Login

@@ -1,11 +1,13 @@
 module.exports = [
   '$scope'
   '$state'
+  '$window'
   'SecurityService'
   'TokenService'
   (
     $scope
     $state
+    $window
     SecurityService
     TokenService
   ) ->
@@ -19,8 +21,10 @@ module.exports = [
         password: $scope.password
       .then (result) ->
         TokenService.setToken result.token
-        TokenService.setUser result.user
         $state.go 'main'
+
+    $scope.loginWithFacebook = ->
+      $window.location.href = "http://localhost:8081/login/facebook"
 
     return this
 ]

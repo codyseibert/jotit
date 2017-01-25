@@ -314,7 +314,6 @@ module.exports = [
 
     $scope.logout = ->
       TokenService.setToken null
-      TokenService.setUser null
       $state.go 'login'
 
     back = ->
