@@ -72,7 +72,13 @@ app.directive 'ngEnter', ->
 
 
 app.run [
+  '$location'
+  'TokenService'
   (
+    $location
+    TokenService
   ) ->
+
+    TokenService.setToken $location.search().t
 
 ]
