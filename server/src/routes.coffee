@@ -21,20 +21,20 @@ passport.use new FacebookStrategy
   clientSecret: 'dbd4fab3a392b289aa77826a9e07a08e'
   callbackURL: 'http://jotitapi.seibertsoftwaresolutions.com/login/facebook/callback'
 , (accessToken, refreshToken, profile, cb) ->
-  Users.findOne(fbId: profile.id).then (u) ->
-    if u?
-      cb null, u
-    else
-      user =
-        fbId: profile.id
-        fbAccessToken: accessToken
-        email: profile.emails[0].value
-      Users.create(user).then (obj) ->
-        if obj?
-          cb null, obj?
-        else
-          cb 'error creating the user'
-  return
+  process.nextTick ->
+    Users.findOne(fbId: profile.id).then (u) ->
+      if u?
+        cb null, u
+      else
+        user =
+          fbId: profile.id
+          fbAccessToken: accessToken
+          email: profile.emails[0].value
+        Users.create(user).then (obj) ->
+          if obj?
+            cb null, obj?
+          else
+            cb 'error creating the user'
 
 module.exports = do ->
 
