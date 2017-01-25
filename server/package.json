@@ -30,6 +30,8 @@
     "multer": "^1.1.0",
     "mysql": "^2.10.2",
     "node-uuid": "^1.4.7",
+    "passport": "^0.3.2",
+    "passport-facebook": "^2.1.1",
     "randomstring": "^1.1.5",
     "sequelize": "^3.18.0",
     "stripe": "^4.5.0",

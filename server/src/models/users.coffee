@@ -6,4 +6,6 @@ module.exports = new Schema
   email: String
   password: String
   salt: String
+  fbId: String
+  fbAccessToken: String
   data: Object
