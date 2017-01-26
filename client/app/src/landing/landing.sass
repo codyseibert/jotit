@@ -1,4 +1,25 @@
 #landing
+  .facebook
+    padding-top: 30px
+    padding-bottom: 30px
+
+  button
+    color: white
+    width: 100%
+    height: 90px
+    font-size: 30px
+    margin-top: 20px
+    background-color: $COLOR_B
+    vertical-align: center
+
+    .text
+      padding-top: 6px
+
+    i
+      float: left
+      margin-left: 20px
+      font-size: 50px
+
   h1
     text-align: center
     font-size: 60px
@@ -18,7 +39,7 @@
 
     .laptop
       width: 100%
-      margin-top: 100px
+      margin-top: 0px
 
     ul
       li
@@ -46,17 +67,34 @@
     .mt4
       margin-top: 140px
 
+  .topnav.white
+    background-color: white
+    color: black
+    -webkit-transition: background 0.5s linear
+    -moz-transition: background 0.5s linear
+    -ms-transition: background 0.5s linear
+    -o-transition: background 0.5s linear
+    transition: background 0.5s linear
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24)
 
   .topnav
+    z-index: 10
+    width: 100%
     color: white
+    height: 70px
     font-size: 30px
     text-align: right
-    padding-top: 30px
-    padding-bottom: 30px
+    padding-top: 15px
+    // padding-bottom: 30px
+    position: fixed
 
     .link
       display: inline-block
       margin-right: 20px
+      cursor: pointer
+
+    .link:hover
+      color: $COLOR_B
 
   .logo
     text-align: center
@@ -72,20 +110,3 @@
       padding-top: 100px
       color: white
       font-size: 50px
-
-    button
-      color: white
-      width: 100%
-      height: 90px
-      font-size: 30px
-      margin-top: 20px
-      background-color: $COLOR_B
-      vertical-align: center
-
-      .text
-        padding-top: 6px
-
-      i
-        float: left
-        margin-left: 20px
-        font-size: 50px

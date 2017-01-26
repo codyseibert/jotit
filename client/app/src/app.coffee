@@ -3,6 +3,7 @@ window.moment = require 'moment'
 angular = require 'angular'
 require 'angular-scroll'
 require 'angular-filter'
+require 'angular-animate'
 require 'angular-local-storage'
 require 'ng-lodash'
 require '../../node_modules/angular-ui-bootstrap/dist/ui-bootstrap-tpls'
@@ -20,6 +21,7 @@ require 'angular-jwt'
 app = require('angular').module('jotit', [
   require 'angular-ui-router'
   require 'angular-resource'
+  'ngAnimate'
   'angular-click-outside'
   'textAngular'
   'duScroll'
@@ -34,6 +36,15 @@ app = require('angular').module('jotit', [
   'angular-jwt'
   require 'angular-moment'
 ])
+
+app.directive 'ads', ->
+  restrict: 'A'
+  templateUrl: 'ads'
+  controller: ->
+      (adsbygoogle = window.adsbygoogle || []).push({})
+
+app.value 'duScrollDuration', 500
+app.value 'duScrollOffset', 70
 
 app.factory 'AuthorizationInterceptor', require './authorization_interceptor'
 

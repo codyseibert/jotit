@@ -24,7 +24,7 @@ module.exports = [
         $state.go 'main'
 
     $scope.loginWithFacebook = ->
-      $window.location.href = "http://jotitapi.seibertsoftwaresolutions.com/login/facebook"
+      $window.location.href = "http://notemanapi.seibertsoftwaresolutions.com/login/facebook"
 
     return this
 ]

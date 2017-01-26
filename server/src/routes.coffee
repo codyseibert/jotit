@@ -20,7 +20,7 @@ TOKEN_PASSWORD = config.JWT_PASSWORD
 passport.use new FacebookStrategy
   clientID: '1901234816764848'
   clientSecret: 'dbd4fab3a392b289aa77826a9e07a08e'
-  callbackURL: 'http://jotitapi.seibertsoftwaresolutions.com/login/facebook/callback'
+  callbackURL: 'http://notemanapi.seibertsoftwaresolutions.com/login/facebook/callback'
   profileFields: ['email', 'id']
 , (accessToken, refreshToken, profile, cb) ->
   Users.findOne(fbId: profile.id).then (u) ->
@@ -46,13 +46,13 @@ module.exports = do ->
 
   app.get '/login/facebook/callback',
     passport.authenticate('facebook',
-      failureRedirect: 'http://jotit.seibertsoftwaresolutions.com'
+      failureRedirect: 'http://noteman.seibertsoftwaresolutions.com'
       session: false
     )
     , (req, res) ->
       if req.user?
         jwt.sign _id: req.user._id, TOKEN_PASSWORD, algorithm: 'HS256', (err, token) ->
-          res.redirect "http://jotit.seibertsoftwaresolutions.com/topics?t=#{token}"
+          res.redirect "http://noteman.seibertsoftwaresolutions.com/topics?t=#{token}"
       else
         res.status 400
         res.send 'user not found'
