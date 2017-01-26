@@ -12,6 +12,9 @@ connect = require 'gulp-connect'
 replace = require 'gulp-replace'
 args = require('yargs').argv
 modRewrite = require 'connect-modrewrite'
+uglify = require 'gulp-uglify'
+pump = require 'pump'
+
 
 isProduction = args.env is 'production'
 
@@ -64,9 +67,11 @@ gulp.task 'coffee', ['templates'], ->
     .pipe(gulp.dest('tmp/js'))
 
 gulp.task 'scripts', ['replace'], ->
-  gulp.src('tmp/js/app.js')
+  t = gulp.src('tmp/js/app.js')
     .pipe(browserify({}))
-    .pipe(gulp.dest('dist'))
+  if isProduction
+    t = t.pipe(uglify())
+  t.pipe(gulp.dest('dist'))
     .pipe connect.reload()
 
 gulp.task 'replace', ['coffee'], ->
