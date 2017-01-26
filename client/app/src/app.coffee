@@ -41,7 +41,7 @@ app.directive 'ads', ->
   restrict: 'A'
   templateUrl: 'ads'
   controller: ->
-      (adsbygoogle = window.adsbygoogle || []).push({})
+    (adsbygoogle = window.adsbygoogle || []).push({})
 
 app.value 'duScrollDuration', 500
 app.value 'duScrollOffset', 70
