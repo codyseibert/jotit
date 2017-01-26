@@ -29,6 +29,16 @@ module.exports = [
       '#EBC9D9'
     ]
 
+    $scope.showRequestModal = false
+    $scope.request = {}
+
+    $scope.saveRequest = ->
+      $scope.user.requests ?= []
+      $scope.user.requests.push $scope.request
+      $scope.save()
+      $scope.request = {}
+      $scope.showRequestModal = false
+
     $scope.alertEventOnClick = (event) ->
       $scope.expanded = event.note
 
@@ -84,7 +94,7 @@ module.exports = [
 
     reloadCharts = ->
       pts = getPoints $scope.current
-      
+
       $scope.chartKeys = Object.keys pts
       for name in $scope.chartKeys
         $scope.data[name] = [

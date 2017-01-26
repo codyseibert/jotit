@@ -9,3 +9,4 @@ module.exports = new Schema
   fbId: String
   fbAccessToken: String
   data: Object
+  requests: Array

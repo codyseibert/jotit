@@ -1,6 +1,7 @@
 app = require './app'
 LoginCtrl = require './controllers/login_controller'
 UsersCtrl = require './controllers/users_controller'
+FeaturesCtrl = require './controllers/features_controller'
 
 userIsLoggedIn = require './helpers/user_is_logged_in'
 userOwnsUser = require './helpers/user_owns_user'
@@ -58,6 +59,8 @@ module.exports = do ->
         res.send 'user not found'
 
   app.post '/login', LoginCtrl.post
+
+  app.get '/features', FeaturesCtrl.index
 
   app.post '/users', UsersCtrl.post
   app.get '/users/:id', userIsLoggedIn, userOwnsUser, UsersCtrl.show

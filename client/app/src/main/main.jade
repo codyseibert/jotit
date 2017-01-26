@@ -273,3 +273,29 @@
         textarea.ex(
           ng-model="expanded.markdown"
         )
+        
+.requestModal(
+  ng-show="showRequestModal"  
+)
+  .inner
+    .actions
+      i.fa.fa-close(
+        ng-click="showRequestModal = false"
+      )
+      
+    .wrap
+      h1 Request a Feature or Report a Bug
+      textarea(
+        ng-model="request.description"
+      )
+      button(
+        ng-click="saveRequest()"
+      ) 
+        i.fa.fa-submit
+        | Submit
+      
+button.openRequestModal(
+  ng-click="showRequestModal = true"
+) 
+  i.fa.fa-bullhorn
+  | Give us some Feedback!
