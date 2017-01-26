@@ -1,221 +1,379 @@
-button
-  padding: 10px
-  background-color: $COLOR_A
-  border: none
-  color: white
-  width: 120px
-  margin-right: 10px
-  border: 2px solid rgba(255, 255, 255, 0) !important
-  outline: none
+#main
+  button
+    padding: 10px
+    background-color: $COLOR_A
+    border: none
+    color: white
+    width: 120px
+    margin-right: 10px
+    border: 2px solid rgba(255, 255, 255, 0) !important
+    outline: none
 
-button.selected
-  // background-color: #FFF !important
-  // color: #666 !important
-  border: 2px solid $COLOR_B !important
-  outline: none
+  button.selected
+    // background-color: #FFF !important
+    // color: #666 !important
+    border: 2px solid $COLOR_B !important
+    outline: none
 
-.logo
-  position: absolute
-  font-size: 36px
-  color: #FFF
-  left: 20px
-
-i
-  cursor: pointer
-  position: relative
-  margin-right: 5px
-
-.header
-  width: 100%
-  height: 50px
-  background-color: $COLOR_C
-  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24)
-
-  .logout
-    display: inline-block
-    float: right
+  .logo
+    position: absolute
+    font-size: 36px
     color: #FFF
+    left: 20px
+
+  i
     cursor: pointer
     position: relative
-    top: 12px
-    right: 16px
+    margin-right: 5px
+
+  .header
+    width: 100%
+    height: 50px
+    background-color: $COLOR_C
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24)
+
+    .logout
+      display: inline-block
+      float: right
+      color: #FFF
+      cursor: pointer
+      position: relative
+      top: 12px
+      right: 16px
+      font-size: 18px
+
+    .logout:hover
+      color: #d52925
+
+    i
+      cursor: pointer
+      position: relative
+      margin-right: 5px
+
+  .card1
+    background: #fff
+    border-radius: 2px
+    display: inline-block
+    margin: 1rem
+    width: 100%
+    position: relative
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24)
+
+  .crums
+    padding: 10px
+    padding-left: 0px
+    width: 100%
+
+  .top
+    text-align: center
+    font-size: 30px
+    font-weight: bold
+    margin-top: 10px
+    margin-bottom: 10px
+
+    i
+      cursor: pointer
+      margin-left: 14px
+
+    i:hover
+      color: #666
+
+  .toolbar
+    margin-bottom: 26px
+
+  .showNotes
+    float: right
+    display: inline-block
+
+    button
+      padding: 10px
+      background-color: $COLOR_H
+      border: none
+      color: white
+      width: 120px
+      margin-right: 10px
+
+    button:hover
+      background-color: $COLOR_H
+
+    i
+      cursor: pointer
+      position: relative
+      margin-right: 5px
+
+  .showAnalytics
+    float: right
+    display: inline-block
+
+    button
+      background-color: $COLOR_E
+      padding: 10px
+      border: none
+      color: white
+      width: 120px
+      margin-right: 10px
+
+  .showTags
+    float: right
+    display: inline-block
+
+    button
+      background-color: $COLOR_C
+
+  .showCalendar
+    float: right
+    display: inline-block
+
+    button
+      padding: 10px
+      background-color: $COLOR_D
+      border: none
+      color: white
+      width: 120px
+      margin-right: 10px
+
+    button:hover
+      background-color: $COLOR_D
+
+    i
+      cursor: pointer
+      position: relative
+      margin-right: 5px
+
+  .addNote
+    display: inline-block
+
+    button
+      padding: 10px
+      background-color: $COLOR_K
+      border: none
+      color: white
+      width: 120px
+      margin-left: 10px
+
+    button:hover
+      background-color: $COLOR_K
+
+    i
+      cursor: pointer
+      position: relative
+      margin-right: 5px
+
+  .search
+    position: relative
+    display: inline-block
+
+    input
+      padding: 10px
+      -webkit-appearance: none
+      border: 1px solid #999
+      outline: none
+      padding-left: 38px
+      width: 220px
+
+    i
+      position: absolute
+      left: 15px
+      top: 12px
+      font-size: 20px
+      color: #999
+
+  .chrts
+    margin-bottom: 30px
+
+  .add
+    font-size: 14px
+    font-weight: bold
+    color: white
+    text-align: center
+    margin-top: 10px
+
+    button.delete
+      background-color: $COLOR_J
+      width: 130px
+
+    button.delete:hover
+      background-color: $COLOR_J
+
+    button
+      padding: 10px
+      background-color: $COLOR_K
+      border: none
+      color: white
+      padding-left: 20px
+      padding-right: 20px
+
+    button:hover
+      background-color: $COLOR_K
+
+    i
+      cursor: pointer
+      position: relative
+      margin-right: 5px
+
+    i:hover
+      color: #666
+
+  .notes
+    .empty
+      text-align: center
+      height: 300px
+      margin-bottom: 20px
+      overflow: hidden
+      padding: 20px
+      background: #fff
+      border-radius: 2px
+      display: inline-block
+      position: relative
+      width: 100%
+      border-top: 4px solid $COLOR_E
+      box-shadow: 0 3px 5px rgba(0,0,0,0.12), 0 3px 5px rgba(0,0,0,0.24)
+      overflow-y: auto
+
+      i.fa-sticky-note-o
+        color: #666
+        font-size: 80px
+        margin-top: 30px
+
+      h5
+        margin-top: 20px
+
+      button
+        margin-top: 20px
+        background-color: $COLOR_K
+
+  .folders
+    .empty
+      text-align: center
+      margin-top: 30px
+
+      i
+        font-size: 80px
+
+  .folder
+    position: relative
+    cursor: pointer
+    background-color: #ff9000
+    padding: 6px
+    color: white
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24)
+
+    .tab
+      top: -6px
+      left: 8px
+      border-top-right-radius: 8px
+      border-top-left-radius: 8px
+      background-color: #ff9000
+      height: 20px
+      width: 50px
+      position: absolute
+
+      i
+        position: relative
+        left: 16px
+        top: 10px
+
+    .title
+      position: relative
+      font-size: 20px
+      margin-left: 60px
+      display: inline-block
+
+    input
+      z-index: 2
+      position: relative
+      margin-left: 60px
+
+    i
+      display: inline-block
+      cursor: pointer
+      font-size: 20px
+      left: 5px
+      position: relative
+      top: 2px
+      z-index: 10
+
+    i.fa-trash
+      top: 0px
+      left: 20px
+
+    .fa-save
+      left: 10px
+
+    .fa-pencil
+      top: 0px
+      left: 10px
+
+    i:hover
+      color: #EEE
+
+    .count
+      font-size: 12px
+      position: absolute
+      top: 10px
+      right: 14px
+      color: #fee
+
+      .circle
+        border-radius: 50px
+        width: 20px
+        height: 20px
+        background-color: rgba(255, 255, 255, 0.9)
+        position: relative
+        top: 0px
+
+      span
+        position: relative
+        top: -18px
+        left: 7px
+        color: #666
+
+      span.double
+        left: 5px
+
+  .folder:hover
+    color: #FFF
+    background-color: blue
+
+  .card
+    border-bottom: 1px solid #DDD
+    padding: 2px
+    cursor: pointer
     font-size: 18px
 
-  .logout:hover
-    color: #d52925
+  .card:hover
+    color: orange
+    background-color: #eee
 
-  i
+  .content
+    padding: 20px
+    padding-top: 0px
+    min-height: 100%
+
+  .crum
+    display: inline-block
+    font-size: 24px
+    font-weight: bold
+
+    i
+      margin-left: 20px
+      margin-right: 16px
+      font-size: 16px
+
+  .crum .word
     cursor: pointer
-    position: relative
-    margin-right: 5px
+    display: inline-block
 
-.card1
-  background: #fff
-  border-radius: 2px
-  display: inline-block
-  margin: 1rem
-  width: 100%
-  position: relative
-  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24)
+  .crum .word:hover
+    color: blue
 
-.crums
-  padding: 10px
-  padding-left: 0px
-  width: 100%
+  .wrapper
+    border-top: 4px solid $COLOR_L
+    height: 300px
+    width: 100%
+    overflow: hidden
 
-.top
-  text-align: center
-  font-size: 30px
-  font-weight: bold
-  margin-top: 10px
-  margin-bottom: 10px
-
-  i
-    cursor: pointer
-    margin-left: 14px
-
-  i:hover
-    color: #666
-
-.toolbar
-  margin-bottom: 26px
-
-.showNotes
-  float: right
-  display: inline-block
-
-  button
-    padding: 10px
-    background-color: $COLOR_H
-    border: none
-    color: white
-    width: 120px
-    margin-right: 10px
-
-  button:hover
-    background-color: $COLOR_H
-
-  i
-    cursor: pointer
-    position: relative
-    margin-right: 5px
-
-.showAnalytics
-  float: right
-  display: inline-block
-
-  button
-    background-color: $COLOR_E
-    padding: 10px
-    border: none
-    color: white
-    width: 120px
-    margin-right: 10px
-
-.showTags
-  float: right
-  display: inline-block
-
-  button
-    background-color: $COLOR_C
-
-.showCalendar
-  float: right
-  display: inline-block
-
-  button
-    padding: 10px
-    background-color: $COLOR_D
-    border: none
-    color: white
-    width: 120px
-    margin-right: 10px
-
-  button:hover
-    background-color: $COLOR_D
-
-  i
-    cursor: pointer
-    position: relative
-    margin-right: 5px
-
-.addNote
-  display: inline-block
-
-  button
-    padding: 10px
-    background-color: $COLOR_K
-    border: none
-    color: white
-    width: 120px
-    margin-left: 10px
-
-  button:hover
-    background-color: $COLOR_K
-
-  i
-    cursor: pointer
-    position: relative
-    margin-right: 5px
-
-.search
-  position: relative
-  display: inline-block
-
-  input
-    padding: 10px
-    -webkit-appearance: none
-    border: 1px solid #999
-    outline: none
-    padding-left: 38px
-    width: 220px
-
-  i
-    position: absolute
-    left: 15px
-    top: 12px
-    font-size: 20px
-    color: #999
-
-.chrts
-  margin-bottom: 30px
-
-.add
-  font-size: 14px
-  font-weight: bold
-  color: white
-  text-align: center
-  margin-top: 10px
-
-  button.delete
-    background-color: $COLOR_J
-    width: 130px
-
-  button.delete:hover
-    background-color: $COLOR_J
-
-  button
-    padding: 10px
-    background-color: $COLOR_K
-    border: none
-    color: white
-    padding-left: 20px
-    padding-right: 20px
-
-  button:hover
-    background-color: $COLOR_K
-
-  i
-    cursor: pointer
-    position: relative
-    margin-right: 5px
-
-  i:hover
-    color: #666
-
-.notes
-  .empty
-    text-align: center
+  .note
     height: 300px
     margin-bottom: 20px
     overflow: hidden
@@ -229,381 +387,225 @@ i
     box-shadow: 0 3px 5px rgba(0,0,0,0.12), 0 3px 5px rgba(0,0,0,0.24)
     overflow-y: auto
 
-    i.fa-sticky-note-o
-      color: #666
-      font-size: 80px
-      margin-top: 30px
+  .greentop
+    border-top: 4px solid $COLOR_L
+    overflow: hidden
+    height: 300px
+    margin-bottom: 20px
 
-    h5
-      margin-top: 20px
+  .notearea
+    width: 100%
+    min-height: 296px
+    border-radius: 2px
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24)
+    position: relative
+    display: inline-block
+    background: #fff
+    padding: 20px
+    border: 1px solid #999
+    outline: none
+    margin-bottom: 20px
 
-    button
-      margin-top: 20px
-      background-color: $COLOR_K
+  .ex
+    width: 100%
+    min-height: 300px
+    border-radius: 2px
+    position: relative
+    display: inline-block
+    background: #fff
+    padding: 20px
+    border: 1px solid #999
+    outline: none
 
-.folders
-  .empty
-    text-align: center
-    margin-top: 30px
+  .right
+    text-align: right
 
-    i
-      font-size: 80px
+  .note-modal
+    position: fixed
+    z-index: 1
+    background-color: rgba(0, 0, 0, 0.4)
+    height: 100%
+    width: 100%
+    top: 0px
+    left: 0px
 
-.folder
-  position: relative
-  cursor: pointer
-  background-color: #ff9000
-  padding: 6px
-  color: white
-  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24)
-
-  .tab
-    top: -6px
-    left: 8px
-    border-top-right-radius: 8px
-    border-top-left-radius: 8px
-    background-color: #ff9000
-    height: 20px
-    width: 50px
-    position: absolute
-
-    i
-      position: relative
-      left: 16px
+    .actions
+      position: absolute
       top: 10px
+      right: -10px
 
-  .title
-    position: relative
-    font-size: 20px
-    margin-left: 60px
+    .wrap
+      overflow-y: scroll
+      height: 100%
+
+    .inner
+      position: relative
+      top: 50%
+      transform: translateY(-50%)
+      margin: 0 auto
+      width: 50%
+      height: 70%
+      background-color: white
+      padding: 20px
+      border-top: 4px solid $COLOR_E
+
+      textarea
+        margin-top: 40px
+
+      i
+        z-index: 5
+        position: absolute
+        right: 20px
+        font-size: 20px
+        cursor: pointer
+
+      i:hover
+        color: #666
+
+      .fa-save
+        right: 50px
+
+      .fa-pencil
+        right: 50px
+
+  .calendar
+    width: 80%
+    padding: 40px
+    background-color: white
     display: inline-block
+    box-shadow: 0 3px 5px rgba(0,0,0,0.12), 0 3px 5px rgba(0,0,0,0.24)
 
-  input
-    z-index: 2
-    position: relative
-    margin-left: 60px
 
-  i
-    display: inline-block
-    cursor: pointer
-    font-size: 20px
-    left: 5px
-    position: relative
-    top: 2px
-    z-index: 10
-
-  i.fa-trash
-    top: 0px
-    left: 20px
-
-  .fa-save
-    left: 10px
-
-  .fa-pencil
-    top: 0px
-    left: 10px
-
-  i:hover
-    color: #EEE
-
-  .count
-    font-size: 12px
+  .icons
     position: absolute
     top: 10px
     right: 14px
-    color: #fee
-
-    .circle
-      border-radius: 50px
-      width: 20px
-      height: 20px
-      background-color: rgba(255, 255, 255, 0.9)
-      position: relative
-      top: 0px
-
-    span
-      position: relative
-      top: -18px
-      left: 7px
-      color: #666
-
-    span.double
-      left: 5px
-
-.folder:hover
-  color: #FFF
-  background-color: blue
-
-.card
-  border-bottom: 1px solid #DDD
-  padding: 2px
-  cursor: pointer
-  font-size: 18px
-
-.card:hover
-  color: orange
-  background-color: #eee
-
-.content
-  padding: 20px
-  padding-top: 0px
-
-.crum
-  display: inline-block
-  font-size: 24px
-  font-weight: bold
-
-  i
-    margin-left: 20px
-    margin-right: 16px
-    font-size: 16px
-
-.crum .word
-  cursor: pointer
-  display: inline-block
-
-.crum .word:hover
-  color: blue
-
-.wrapper
-  border-top: 4px solid $COLOR_L
-  height: 300px
-  width: 100%
-  overflow: hidden
-
-.note
-  height: 300px
-  margin-bottom: 20px
-  overflow: hidden
-  padding: 20px
-  background: #fff
-  border-radius: 2px
-  display: inline-block
-  position: relative
-  width: 100%
-  border-top: 4px solid $COLOR_E
-  box-shadow: 0 3px 5px rgba(0,0,0,0.12), 0 3px 5px rgba(0,0,0,0.24)
-  overflow-y: auto
-
-.greentop
-  border-top: 4px solid $COLOR_L
-  overflow: hidden
-  height: 300px
-  margin-bottom: 20px
-
-.notearea
-  width: 100%
-  min-height: 296px
-  border-radius: 2px
-  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24)
-  position: relative
-  display: inline-block
-  background: #fff
-  padding: 20px
-  border: 1px solid #999
-  outline: none
-  margin-bottom: 20px
-
-.ex
-  width: 100%
-  min-height: 300px
-  border-radius: 2px
-  position: relative
-  display: inline-block
-  background: #fff
-  padding: 20px
-  border: 1px solid #999
-  outline: none
-
-.right
-  text-align: right
-
-.note-modal
-  position: fixed
-  z-index: 1
-  background-color: rgba(0, 0, 0, 0.4)
-  height: 100%
-  width: 100%
-  top: 0px
-  left: 0px
-
-  .actions
-    position: absolute
-    top: 10px
-    right: -10px
-
-  .wrap
-    overflow-y: scroll
-    height: 100%
-
-  .inner
-    position: relative
-    top: 50%
-    transform: translateY(-50%)
-    margin: 0 auto
-    width: 50%
-    height: 70%
-    background-color: white
-    padding: 20px
-    border-top: 4px solid $COLOR_E
-
-    textarea
-      margin-top: 40px
+    z-index: 1
 
     i
-      z-index: 5
-      position: absolute
-      right: 20px
-      font-size: 20px
-      cursor: pointer
+      font-size: 18px
+      display: inline-block
+      float: right
+      margin-right: 10px
 
     i:hover
-      color: #666
+      color: $COLOR_B
 
-    .fa-save
-      right: 50px
+  .tags
+    margin-bottom: 20px
 
-    .fa-pencil
-      right: 50px
+    .tag
+      text-align: right
+      font-size: 30px
 
-.calendar
-  width: 80%
-  padding: 40px
-  background-color: white
-  display: inline-block
-  box-shadow: 0 3px 5px rgba(0,0,0,0.12), 0 3px 5px rgba(0,0,0,0.24)
+    .tagnote
+      padding: 10px
+      margin-right: 20px
+      cursor: pointer
+      overflow-y: scroll
+      width: 200px
+      display: inline-block
+      height: 200px
+      background-color: white
+      border-top: 4px solid $COLOR_E
+      margin-bottom: 10px
+      box-shadow: 0 3px 5px rgba(0,0,0,0.12), 0 3px 5px rgba(0,0,0,0.24)
 
+    .tagnote:hover
+      box-shadow: 0 3px 5px rgba(0,0,0,0.22), 0 3px 5px rgba(0,0,0,0.34)
 
-.icons
-  position: absolute
-  top: 10px
-  right: 14px
-  z-index: 1
-
-  i
-    font-size: 18px
-    display: inline-block
-    float: right
-    margin-right: 10px
-
-  i:hover
-    color: $COLOR_B
-
-.tags
-  margin-bottom: 20px
-
-  .tag
-    text-align: right
-    font-size: 30px
-
-  .tagnote
-    padding: 10px
-    margin-right: 20px
+  .fc-content
     cursor: pointer
-    overflow-y: scroll
-    width: 200px
-    display: inline-block
-    height: 200px
-    background-color: white
-    border-top: 4px solid $COLOR_E
-    margin-bottom: 10px
-    box-shadow: 0 3px 5px rgba(0,0,0,0.12), 0 3px 5px rgba(0,0,0,0.24)
 
-  .tagnote:hover
-    box-shadow: 0 3px 5px rgba(0,0,0,0.22), 0 3px 5px rgba(0,0,0,0.34)
-
-.fc-content
-  cursor: pointer
-
-.ch
-  padding: 20px
-  background-color: white
-
-.analyticsPanel
-
-  .title
-    font-size: 30px
-    text-align: right
-
-  .graphwrapper
-    width: 90%
-    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24)
-    text-align: center
-    border-top: 0px
-    background-color: white
+  .ch
     padding: 20px
+    background-color: white
 
-  .empty
+  .analyticsPanel
+
+    .title
+      font-size: 30px
+      text-align: right
+
+    .graphwrapper
+      width: 90%
+      box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24)
+      text-align: center
+      border-top: 0px
+      background-color: white
+      padding: 20px
+
+    .empty
+      text-align: center
+      padding-top: 100px
+
+      i
+        font-size: 60px
+
+      .content
+        font-size: 40px
+
+      p
+        font-size: 24px
+
+  .calendarPanel
     text-align: center
-    padding-top: 100px
 
-    i
-      font-size: 60px
-
-    .content
+  .tagPanel
+    .empty
+      padding-top: 100px
+      text-align: center
       font-size: 40px
 
-    p
-      font-size: 24px
+      p
+        font-size: 24px
 
-.calendarPanel
-  text-align: center
+      i
+        font-size: 60px
+        color: #333
 
-.tagPanel
-  .empty
-    padding-top: 100px
-    text-align: center
-    font-size: 40px
+  .requestModal
+    position: fixed
+    z-index: 1
+    background-color: rgba(0, 0, 0, 0.4)
+    height: 100%
+    width: 100%
+    top: 0px
+    left: 0px
 
-    p
-      font-size: 24px
+    .actions
+      position: absolute
+      top: 10px
+      right: 10px
+      font-size: 20px
+
+    .inner
+      position: relative
+      top: 50%
+      transform: translateY(-50%)
+      margin: 0 auto
+      width: 50%
+      height: 70%
+      background-color: white
+      padding: 20px
+      border-top: 4px solid $COLOR_E
+
+      textarea
+        width: 100%
+        height: 300px
+
+      button
+        width: 100%
+        margin-top: 10px
+        background-color: $COLOR_B
+
+  .openRequestModal
+    position: fixed
+    bottom: 20px
+    right: 20px
+    background-color: $COLOR_J
+    width: 220px
+    font-size: 18px
 
     i
-      font-size: 60px
-      color: #333
-
-.requestModal
-  position: fixed
-  z-index: 1
-  background-color: rgba(0, 0, 0, 0.4)
-  height: 100%
-  width: 100%
-  top: 0px
-  left: 0px
-
-  .actions
-    position: absolute
-    top: 10px
-    right: 10px
-    font-size: 20px
-
-  .inner
-    position: relative
-    top: 50%
-    transform: translateY(-50%)
-    margin: 0 auto
-    width: 50%
-    height: 70%
-    background-color: white
-    padding: 20px
-    border-top: 4px solid $COLOR_E
-
-    textarea
-      width: 100%
-      height: 300px
-
-    button
-      width: 100%
-      margin-top: 10px
-      background-color: $COLOR_B
-
-.openRequestModal
-  position: fixed
-  bottom: 20px
-  right: 20px
-  background-color: $COLOR_J
-  width: 220px
-  font-size: 18px
-
-  i
-    font-size: 18px
+      font-size: 18px

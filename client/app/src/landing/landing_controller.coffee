@@ -16,8 +16,12 @@ module.exports = [
     _
   ) ->
 
-    $scope.loginWithFacebook = ->
-      $window.location.href = "http://notemanapi.seibertsoftwaresolutions.com/login/facebook"
+    if TokenService.getToken()?
+      $state.go 'topics'
+
+    $scope.loginWithFacebook = (a) ->
+      if a? and a is true
+        $window.location.href = "http://notemanapi.seibertsoftwaresolutions.com/login/facebook"
 
     return this
 ]

@@ -62,6 +62,8 @@ app.config ['$httpProvider', ($httpProvider) ->
 require './main'
 require './login'
 require './landing'
+require './tos'
+require './pp'
 
 app.constant 'API_PATH', 'http://localhost:8081'
 
@@ -75,7 +77,6 @@ app.directive 'ngEnter', ->
         event.preventDefault()
       return
     return
-
 
 app.run [
   '$location'

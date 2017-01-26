@@ -34,5 +34,19 @@ module.exports = [
             controller: 'LoginCtrl'
             templateUrl: 'login/login.html'
 
+      .state 'tos',
+        url: '/tos'
+        views:
+          'main':
+            controller: 'TOSCtrl'
+            templateUrl: 'tos/tos.html'
+
+      .state 'pp',
+        url: '/pp'
+        views:
+          'main':
+            controller: 'PPCtrl'
+            templateUrl: 'pp/pp.html'
+
     return this
 ]

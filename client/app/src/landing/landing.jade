@@ -30,6 +30,7 @@
             | NOTEMAN BETA
             <br>
             i.fa.fa-smile-o
+            p I'll work on this landing page soon
         .col-md-4
           .cta
             .description 
@@ -38,10 +39,18 @@
               | Save Time.
           
             button.login(
-              ng-click="loginWithFacebook()"
+              ng-click="loginWithFacebook(agreeB)"
             )
               i.fa.fa-facebook
               .text Sign in with Facebook
+              
+            label
+              input(
+                type="checkbox"
+                ng-model="agreeB"
+              )
+              | I agree with the <a href="/tos" target="_blank">Terms of Service</a> and have read the <a href="pp" target="_blank">Privacy Policy</a>
+            
 
   #about.info
     .container
@@ -92,10 +101,16 @@
         .col-md-4
         .col-md-4
           button.login(
-            ng-click="loginWithFacebook()"
+            ng-click="loginWithFacebook(agreeA)"
           )
             i.fa.fa-facebook
             .text Sign in with Facebook
+          label
+            input(
+              type="checkbox"
+              ng-model="agreeA"
+            )
+            | I agree with the <a href="/tos" target="_blank">Terms of Service</a> and have read the <a href="pp" target="_blank">Privacy Policy</a>
           
   #features.features
     .container

@@ -1,301 +1,302 @@
-.header
-  .logo NOTEMAN BETA
-  
-  .right
-    .logout
-      span(
-        ng-click="logout()"
-      )
-        i.fa.fa-sign-out
-        | Logout 
+#main
+  .header
+    .logo NOTEMAN BETA
+    
+    .right
+      .logout
+        span(
+          ng-click="logout()"
+        )
+          i.fa.fa-sign-out
+          | Logout 
 
-.content
-  .container-fluid
-    .row
-      .col-md-10
-        .crums
-          .crum(
-            ng-click="goto(user.data)"
-          ) 
-            .word Home
-          
-          .crum(
-            ng-repeat="crum in bread"
-            ng-click="goto(crum)"
-          ) 
-            i.fa.fa-caret-right
-            .word {{crum.title}}
-          
-    .row
-      .col-md-3
-        div
-          .folders
-            .folder(
-              ng-click="openTopic(topic)"
-              ng-repeat="topic in current.topics"
-              ng-style="{'background-color': getColor($index)}"
-              ng-mouseover="topic.hovered = true"
-              ng-mouseleave="topic.hovered = false"
+  .content
+    .container-fluid
+      .row
+        .col-md-10
+          .crums
+            .crum(
+              ng-click="goto(user.data)"
             ) 
-              .tab(
+              .word Home
+            
+            .crum(
+              ng-repeat="crum in bread"
+              ng-click="goto(crum)"
+            ) 
+              i.fa.fa-caret-right
+              .word {{crum.title}}
+            
+      .row
+        .col-md-3
+          div
+            .folders
+              .folder(
+                ng-click="openTopic(topic)"
+                ng-repeat="topic in current.topics"
                 ng-style="{'background-color': getColor($index)}"
+                ng-mouseover="topic.hovered = true"
+                ng-mouseleave="topic.hovered = false"
+              ) 
+                .tab(
+                  ng-style="{'background-color': getColor($index)}"
+                )
+                  i.fa.fa-bookmark-o
+                .title(
+                  ng-show="!topic.editing"
+                ) {{topic.title}}
+                input.topic(
+                  type="text"
+                  ng-show="topic.editing"
+                  ng-model="topic.title"
+                  ng-click="$event.stopPropagation();"
+                  ng-class="{'focus': topic.focus}"
+                  ng-enter="$event.stopPropagation(); topic.editing = false; save()"
+                )
+                i.fa.fa-save(
+                  ng-show="topic.editing"
+                  ng-click="$event.stopPropagation(); topic.editing = false; save()"
+                )
+                i.fa.fa-pencil(
+                  ng-show="topic.hovered && !topic.editing"
+                  ng-click="$event.stopPropagation(); topic.editing = true"
+                )
+                i.fa.fa-trash(
+                  ng-show="topic.hovered && !topic.editing"
+                  ng-click="deleteTopic(topic)"
+                )
+                .count 
+                  .circle 
+                  span(
+                    ng-class="{'double': count(topic) > 9}"
+                  ) {{count(topic)}}
+                  
+              .empty(
+                ng-show="!current.topics.length || current.topics.length === 0"
               )
                 i.fa.fa-bookmark-o
-              .title(
-                ng-show="!topic.editing"
-              ) {{topic.title}}
-              input.topic(
-                type="text"
-                ng-show="topic.editing"
-                ng-model="topic.title"
-                ng-click="$event.stopPropagation();"
-                ng-class="{'focus': topic.focus}"
-                ng-enter="$event.stopPropagation(); topic.editing = false; save()"
-              )
-              i.fa.fa-save(
-                ng-show="topic.editing"
-                ng-click="$event.stopPropagation(); topic.editing = false; save()"
-              )
-              i.fa.fa-pencil(
-                ng-show="topic.hovered && !topic.editing"
-                ng-click="$event.stopPropagation(); topic.editing = true"
-              )
-              i.fa.fa-trash(
-                ng-show="topic.hovered && !topic.editing"
-                ng-click="deleteTopic(topic)"
-              )
-              .count 
-                .circle 
-                span(
-                  ng-class="{'double': count(topic) > 9}"
-                ) {{count(topic)}}
+                h5 No Topics Created
                 
-            .empty(
-              ng-show="!current.topics.length || current.topics.length === 0"
-            )
-              i.fa.fa-bookmark-o
-              h5 No Topics Created
-              
-            .add
-              button(
-                ng-click="addTopic()"
-              )
-                i.fa.fa-plus
-                | New Topic
-                
-            
-
-      .col-md-9.middle
-        .row.toolbar
-          .col-md-12
-            .search
-              input(
-                type="text"
-                ng-model="search"
-                placeholder="search through your notes"
-              )
-              i.fa.fa-search
-              
-            .addNote
-              button(
-                ng-click="addNote()"
-              )
-                i.fa.fa-plus
-                | New Note
-                
-            .showAnalytics
-              button(
-                ng-class="{'selected': showPanel === 'analytics'}"
-                ng-click="showPanel = 'analytics'; reloadCharts();"
-              )
-                i.fa.fa-line-chart
-                | Analytics
-                
-            .showCalendar
-              button(
-                ng-class="{'selected': showPanel === 'calendar'}"
-                ng-click="showPanel = 'calendar'"
-              )
-                i.fa.fa-calendar
-                | Calendar
-                
-            .showTags
-              button(
-                ng-class="{'selected': showPanel === 'tags'}"
-                ng-click="showPanel = 'tags'"
-              )
-                i.fa.fa-tags
-                | Tags
-                
-            .showNotes
-              button(
-                ng-class="{'selected': showPanel === 'notes'}"
-                ng-click="showPanel = 'notes'"
-              )
-                i.fa.fa-sticky-note
-                | Notes
-
-        .row.tagPanel(
-          ng-show="showPanel === 'tags'"
-        )
-          .empty(
-            ng-show="tagKeys.length === 0"
-          )
-            i.fa.fa-tags 
-            .text No Tags Found
-            p Use the '#' character to add tags to notes. <br> For example '#hello' will create a tag called hello.
-          
-          .row.tags(
-            ng-repeat="tagKey in tagKeys"
-          )
-            .col-md-3
-              .tag {{tagKey}}
-            
-            .col-md-9
-              .tagnote(
-                ng-repeat="note in tags[tagKey]"
-                marked="note.markdown"
-                ng-click="expand(note)"
-              )
-        
-        .row.calendarPanel(
-          ng-show="showPanel === 'calendar'"
-        )
-          .calendar(
-            ui-calendar="uiConfig.calendar"
-            ng-model="eventSources"
-          )
-          
-        .row.analyticsPanel(
-          ng-show="showPanel === 'analytics'"
-        )   
-          .row.chrts(
-            ng-repeat="key in chartKeys"
-          )
-            .col-md-3 
-              .title {{key}}
-            
-            .col-md-9
-              .graphwrapper 
-                canvas.chart.chart-bar(
-                  chart-data="data[key]" 
-                  chart-labels="labels[key]" 
-                  chart-series="series" 
-                  chart-click="onClick"
+              .add
+                button(
+                  ng-click="addTopic()"
                 )
-            
-          .empty(
-            ng-show="!chartKeys.length"
-          ) 
-            i.fa.fa-line-chart
-            .content No Analytics Found
-            p Try adding an analytic string to your note. <br>For example, add 'money(1000)' and '1/1/2017' to a note <br> in order to create a chart of money vs time.
-            
-        .row(
-          ng-show="showPanel === 'notes'"
-        )
-          .notes
-            .col-md-4(
-              ng-if="!getNotes(current).length"
-            )
-              .empty
-                i.fa.fa-sticky-note-o
-                 
-                h5 This topic has no notes
+                  i.fa.fa-plus
+                  | New Topic
+                  
               
+
+        .col-md-9.middle
+          .row.toolbar
+            .col-md-12
+              .search
+                input(
+                  type="text"
+                  ng-model="search"
+                  placeholder="search through your notes"
+                )
+                i.fa.fa-search
+                
+              .addNote
                 button(
                   ng-click="addNote()"
                 )
                   i.fa.fa-plus
                   | New Note
-              
-            .col-md-4(
-              ng-repeat="note in getNotes(current) | filter : noteFilter | orderBy : getNoteOrder"
+                  
+              .showAnalytics
+                button(
+                  ng-class="{'selected': showPanel === 'analytics'}"
+                  ng-click="showPanel = 'analytics'; reloadCharts();"
+                )
+                  i.fa.fa-line-chart
+                  | Analytics
+                  
+              .showCalendar
+                button(
+                  ng-class="{'selected': showPanel === 'calendar'}"
+                  ng-click="showPanel = 'calendar'"
+                )
+                  i.fa.fa-calendar
+                  | Calendar
+                  
+              .showTags
+                button(
+                  ng-class="{'selected': showPanel === 'tags'}"
+                  ng-click="showPanel = 'tags'"
+                )
+                  i.fa.fa-tags
+                  | Tags
+                  
+              .showNotes
+                button(
+                  ng-class="{'selected': showPanel === 'notes'}"
+                  ng-click="showPanel = 'notes'"
+                )
+                  i.fa.fa-sticky-note
+                  | Notes
+
+          .row.tagPanel(
+            ng-show="showPanel === 'tags'"
+          )
+            .empty(
+              ng-show="tagKeys.length === 0"
             )
-              .icons
-                i.delete.fa.fa-trash(
-                  ng-show="!note.editing"
-                  ng-click="deleteNote(note)"
-                )
-                i.fa(
-                  ng-click="toggleFavorite(note)"
-                  ng-show="!note.editing"
-                  ng-class="{'fa-star': note.favorite, 'fa-star-o': !note.favorite}"
-                )
-                i.expand.fa.fa-expand(
+              i.fa.fa-tags 
+              .text No Tags Found
+              p Use the '#' character to add tags to notes. <br> For example '#hello' will create a tag called hello.
+            
+            .row.tags(
+              ng-repeat="tagKey in tagKeys"
+            )
+              .col-md-3
+                .tag {{tagKey}}
+              
+              .col-md-9
+                .tagnote(
+                  ng-repeat="note in tags[tagKey]"
+                  marked="note.markdown"
                   ng-click="expand(note)"
                 )
-                i.fa.fa-save(
-                  ng-click="note.editing = false; save()"
-                  ng-show="note.editing"
-                )
-                i.fa.fa-pencil(
-                  ng-click="note.editing = true"
+          
+          .row.calendarPanel(
+            ng-show="showPanel === 'calendar'"
+          )
+            .calendar(
+              ui-calendar="uiConfig.calendar"
+              ng-model="eventSources"
+            )
+            
+          .row.analyticsPanel(
+            ng-show="showPanel === 'analytics'"
+          )   
+            .row.chrts(
+              ng-repeat="key in chartKeys"
+            )
+              .col-md-3 
+                .title {{key}}
+              
+              .col-md-9
+                .graphwrapper 
+                  canvas.chart.chart-bar(
+                    chart-data="data[key]" 
+                    chart-labels="labels[key]" 
+                    chart-series="series" 
+                    chart-click="onClick"
+                  )
+              
+            .empty(
+              ng-show="!chartKeys.length"
+            ) 
+              i.fa.fa-line-chart
+              .content No Analytics Found
+              p Try adding an analytic string to your note. <br>For example, add 'money(1000)' and '1/1/2017' to a note <br> in order to create a chart of money vs time.
+              
+          .row(
+            ng-show="showPanel === 'notes'"
+          )
+            .notes
+              .col-md-4(
+                ng-if="!getNotes(current).length"
+              )
+                .empty
+                  i.fa.fa-sticky-note-o
+                   
+                  h5 This topic has no notes
+                
+                  button(
+                    ng-click="addNote()"
+                  )
+                    i.fa.fa-plus
+                    | New Note
+                
+              .col-md-4(
+                ng-repeat="note in getNotes(current) | filter : noteFilter | orderBy : getNoteOrder"
+              )
+                .icons
+                  i.delete.fa.fa-trash(
+                    ng-show="!note.editing"
+                    ng-click="deleteNote(note)"
+                  )
+                  i.fa(
+                    ng-click="toggleFavorite(note)"
+                    ng-show="!note.editing"
+                    ng-class="{'fa-star': note.favorite, 'fa-star-o': !note.favorite}"
+                  )
+                  i.expand.fa.fa-expand(
+                    ng-click="expand(note)"
+                  )
+                  i.fa.fa-save(
+                    ng-click="note.editing = false; save()"
+                    ng-show="note.editing"
+                  )
+                  i.fa.fa-pencil(
+                    ng-click="note.editing = true"
+                    ng-show="!note.editing"
+                  )
+                
+                .note(
+                  marked="note.markdown"
                   ng-show="!note.editing"
                 )
-              
-              .note(
-                marked="note.markdown"
-                ng-show="!note.editing"
-              )
-              .greentop(
-                ng-show="note.editing"
-              )
-                textarea.notearea(
-                  ng-class="{'focus': note.focus}"
-                  ng-model="note.markdown"
+                .greentop(
+                  ng-show="note.editing"
                 )
-                
-.note-modal(
-  ng-show="expanded"
-)
-  .inner
-    .actions
-      i.fa.fa-close(
-        ng-click="compress()"
-      )
-      i.fa.fa-save(
-        ng-show="expanded.editing"
-        ng-click="save(); expanded.editing = false"
-      )
-      i.fa.fa-pencil(
-        ng-show="!expanded.editing"
-        ng-click="expanded.editing = true"
-      )
-    .wrap
-      .expanded(
-        ng-show="!expanded.editing"
-        marked="expanded.markdown"
-      )
-      div(
-        ng-show="expanded.editing"
-      )
-        textarea.ex(
-          ng-model="expanded.markdown"
+                  textarea.notearea(
+                    ng-class="{'focus': note.focus}"
+                    ng-model="note.markdown"
+                  )
+                  
+  .note-modal(
+    ng-show="expanded"
+  )
+    .inner
+      .actions
+        i.fa.fa-close(
+          ng-click="compress()"
+        )
+        i.fa.fa-save(
+          ng-show="expanded.editing"
+          ng-click="save(); expanded.editing = false"
+        )
+        i.fa.fa-pencil(
+          ng-show="!expanded.editing"
+          ng-click="expanded.editing = true"
+        )
+      .wrap
+        .expanded(
+          ng-show="!expanded.editing"
+          marked="expanded.markdown"
+        )
+        div(
+          ng-show="expanded.editing"
+        )
+          textarea.ex(
+            ng-model="expanded.markdown"
+          )
+          
+  .requestModal(
+    ng-show="showRequestModal"  
+  )
+    .inner
+      .actions
+        i.fa.fa-close(
+          ng-click="showRequestModal = false"
         )
         
-.requestModal(
-  ng-show="showRequestModal"  
-)
-  .inner
-    .actions
-      i.fa.fa-close(
-        ng-click="showRequestModal = false"
-      )
-      
-    .wrap
-      h1 Request a Feature or Report a Bug
-      textarea(
-        ng-model="request.description"
-      )
-      button(
-        ng-click="saveRequest()"
-      ) 
-        i.fa.fa-submit
-        | Submit
-      
-button.openRequestModal(
-  ng-click="showRequestModal = true"
-) 
-  i.fa.fa-bullhorn
-  | Give us some Feedback!
+      .wrap
+        h1 Request a Feature or Report a Bug
+        textarea(
+          ng-model="request.description"
+        )
+        button(
+          ng-click="saveRequest()"
+        ) 
+          i.fa.fa-submit
+          | Submit
+        
+  button.openRequestModal(
+    ng-click="showRequestModal = true"
+  ) 
+    i.fa.fa-bullhorn
+    | Give us some Feedback!
