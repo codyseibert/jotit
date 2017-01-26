@@ -50,10 +50,9 @@ module.exports = do ->
       session: false
     )
     , (req, res) ->
-      console.log 'here user', req.user
       if req.user?
         jwt.sign _id: req.user._id, TOKEN_PASSWORD, algorithm: 'HS256', (err, token) ->
-          res.redirect "http://jotit.seibertsoftwaresolutions.com?t=#{token}"
+          res.redirect "http://jotit.seibertsoftwaresolutions.com/topics?t=#{token}"
       else
         res.status 400
         res.send 'user not found'
