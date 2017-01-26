@@ -56,6 +56,7 @@ app.config ['$httpProvider', ($httpProvider) ->
 
 require './main'
 require './login'
+require './landing'
 
 app.constant 'API_PATH', 'http://localhost:8081'
 

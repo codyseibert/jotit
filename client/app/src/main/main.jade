@@ -1,5 +1,5 @@
 .header
-  .logo LOGO 
+  .logo Noteman 
   
   .right
     .logout
@@ -88,7 +88,6 @@
       .col-md-9.middle
         .row.toolbar
           .col-md-12
-          
             .search
               input(
                 type="text"
@@ -97,9 +96,7 @@
               )
               i.fa.fa-search
               
-            .addNote(
-              ng-show="showPanel === 'notes'"
-            )
+            .addNote
               button(
                 ng-click="addNote()"
               )
@@ -137,14 +134,13 @@
               )
                 i.fa.fa-sticky-note
                 | Notes
-                
-                
+
         .row.tagPanel(
           ng-show="showPanel === 'tags'"
         )
           .empty(
             ng-show="tagKeys.length === 0"
-          ) 
+          )
             i.fa.fa-tags 
             .text No Tags Found
             p Use the '#' character to add tags to notes. <br> For example '#hello' will create a tag called hello.
@@ -152,10 +148,10 @@
           .row.tags(
             ng-repeat="tagKey in tagKeys"
           )
-            .col-md-2
+            .col-md-3
               .tag {{tagKey}}
             
-            .col-md-10
+            .col-md-9
               .tagnote(
                 ng-repeat="note in tags[tagKey]"
                 marked="note.markdown"
@@ -173,18 +169,23 @@
         .row.analyticsPanel(
           ng-show="showPanel === 'analytics'"
         )   
-          .ch(
-            ng-show="labels.length"
-          ) 
-            canvas.chart.chart-line(
-              chart-data="data" 
-              chart-labels="labels" 
-              chart-series="series" 
-              chart-click="onClick"
-            )
+          .row.chrts(
+            ng-repeat="key in chartKeys"
+          )
+            .col-md-3 
+              .title {{key}}
+            
+            .col-md-9
+              .graphwrapper 
+                canvas.chart.chart-bar(
+                  chart-data="data[key]" 
+                  chart-labels="labels[key]" 
+                  chart-series="series" 
+                  chart-click="onClick"
+                )
             
           .empty(
-            ng-show="!labels.length"
+            ng-show="!chartKeys.length"
           ) 
             i.fa.fa-line-chart
             .content No Analytics Found

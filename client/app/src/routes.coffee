@@ -13,6 +13,13 @@ module.exports = (
       url: '/'
       views:
         'main':
+          controller: 'LandingCtrl'
+          templateUrl: 'landing/landing.html'
+
+    .state 'topics',
+      url: '/topics'
+      views:
+        'main':
           controller: 'MainCtrl'
           templateUrl: 'main/main.html'
 

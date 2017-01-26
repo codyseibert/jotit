@@ -1,0 +1,30 @@
+
+
+.hero
+  .container
+    .row
+      .col-md-12
+        .topnav
+          //- .link HOME
+          //- .link ABOUT
+          //- .link FEATURES
+          //- .link SUPPORT
+        
+    .row
+      .col-md-6
+        .logo 
+          | Noteman
+          <br>
+          i.fa.fa-smile-o
+      .col-md-4
+        .cta
+          .description 
+            | Take Notes. <br>
+            | Find Notes. <br>
+            | Save Time.
+        
+          button.login(
+            ng-click="loginWithFacebook()"
+          )
+            i.fa.fa-facebook
+            .text Sign in with Facebook

@@ -47,16 +47,15 @@ module.exports = [
 
     $scope.showPanel = 'notes'
 
-    $scope.labels = ["January", "February", "March", "April", "May", "June", "July"]
-    $scope.series = ['Values']
-    $scope.data = [
-      [65, 59, 80, 81, 56, 55, 40]
-    ]
+    $scope.chartKeys = []
+    $scope.labels = {}
+    $scope.series = ['']
+    $scope.data = {}
 
-    chart = null
-    onChartCreated = (event, newValue) ->
-      chart = newValue
-    $scope.$on 'create', onChartCreated
+    charts = []
+    $scope.$on 'create', (event, newValue) ->
+      if charts.indexOf(newValue) is -1
+        charts.push newValue
 
     getPoints = (node) ->
       points = {}
@@ -85,24 +84,25 @@ module.exports = [
 
     reloadCharts = ->
       pts = getPoints $scope.current
-      $scope.labels.splice 0, $scope.labels.length
-      $scope.data[0].splice 0, $scope.data[0].length
-      name = $scope.search
+      
+      $scope.chartKeys = Object.keys pts
+      for name in $scope.chartKeys
+        $scope.data[name] = [
+          pts[name].sort (a, b) ->
+            moment(a.start).isAfter(moment(b.start))
+          .map (x) ->
+            x.count
+        ]
 
-      if pts[name]?
-        $scope.data[0] = pts[name].sort (a, b) ->
-          moment(a.start).isAfter(moment(b.start))
-        .map (x) ->
-          x.count
-
-        $scope.labels = pts[name].sort (a, b) ->
+        $scope.labels[name] = pts[name].sort (a, b) ->
           moment(a.start).isAfter(moment(b.start))
         .map (x) ->
           x.start
 
-        $timeout ->
+      $timeout ->
+        for chart in charts
           chart.resize()
-
+          window.dispatchEvent new Event('resize')
 
     $scope.$watch 'search', (newValue, oldValue) ->
       if $scope.current?
@@ -282,6 +282,7 @@ module.exports = [
       return note.markdown.indexOf($scope.search) isnt -1
 
     $scope.addNote = ->
+      $scope.showPanel = 'notes'
       $scope.current.notes ?= []
       note =
         markdown: ''
@@ -290,8 +291,8 @@ module.exports = [
       $scope.current.notes.unshift note
       $scope.save()
       $timeout ->
-        elm = angular.element(document.querySelectorAll('.focus'))[0]
-        elm.focus()
+        $('.focus').focus()
+        $(window).scrollTop $('.focus').position().top
         note.focus = false
 
     deleteNote = (node, note) ->
