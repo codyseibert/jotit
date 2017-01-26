@@ -15,7 +15,6 @@ module.exports = [
   ) ->
 
     colors = [
-      '#EBC9D9'
       '#E57C6C'
       '#495872'
       '#4174A6'
@@ -27,6 +26,7 @@ module.exports = [
       '#E65D6E'
       '#FE9E95'
       '#FEDAB3'
+      '#EBC9D9'
     ]
 
     $scope.alertEventOnClick = (event) ->
@@ -251,6 +251,13 @@ module.exports = [
       refreshTags()
       reloadCharts()
 
+    $scope.getNoteOrder = (note) ->
+      note.favorite isnt true
+
+    $scope.toggleFavorite = (note) ->
+      note.favorite = not note.favorite
+      $scope.save()
+
     $scope.addTopic = ->
       $scope.current.topics ?= []
       topic =
@@ -267,7 +274,6 @@ module.exports = [
     $scope.deleteTopic = (topic) ->
       y = confirm 'are you sure you want to delete this topic?'
       if y is true
-        back()
         $scope.current.topics.splice $scope.current.topics.indexOf(topic), 1
         $scope.save()
 

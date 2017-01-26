@@ -11,7 +11,7 @@ button
 button.selected
   // background-color: #FFF !important
   // color: #666 !important
-  border: 2px solid #FFF !important
+  border: 2px solid $COLOR_B !important
   outline: none
 
 .logo
@@ -181,7 +181,8 @@ i
   font-size: 14px
   font-weight: bold
   color: white
-  margin-bottom: 16px
+  text-align: center
+  margin-top: 10px
 
   button.delete
     background-color: $COLOR_J
@@ -209,9 +210,41 @@ i
   i:hover
     color: #666
 
+.notes
+  .empty
+    text-align: center
+    height: 300px
+    margin-bottom: 20px
+    overflow: hidden
+    padding: 20px
+    background: #fff
+    border-radius: 2px
+    display: inline-block
+    position: relative
+    width: 100%
+    border-top: 4px solid $COLOR_E
+    box-shadow: 0 3px 5px rgba(0,0,0,0.12), 0 3px 5px rgba(0,0,0,0.24)
+    overflow-y: auto
+
+    i.fa-sticky-note-o
+      color: #666
+      font-size: 80px
+      margin-top: 30px
+
+    h5
+      margin-top: 20px
+
+    button
+      margin-top: 20px
+      background-color: $COLOR_K
+
 .folders
   .empty
     text-align: center
+    margin-top: 30px
+
+    i
+      font-size: 80px
 
 .folder
   position: relative
@@ -254,9 +287,18 @@ i
     left: 5px
     position: relative
     top: 2px
+    z-index: 10
+
+  i.fa-trash
+    top: 0px
+    left: 20px
+
+  .fa-save
+    left: 10px
 
   .fa-pencil
     top: 0px
+    left: 10px
 
   i:hover
     color: #EEE
@@ -379,6 +421,15 @@ i
   top: 0px
   left: 0px
 
+  .actions
+    position: absolute
+    top: 10px
+    right: -10px
+
+  .wrap
+    overflow-y: scroll
+    height: 100%
+
   .inner
     position: relative
     top: 50%
@@ -386,7 +437,6 @@ i
     margin: 0 auto
     width: 50%
     height: 70%
-    overflow-y: scroll
     background-color: white
     padding: 20px
     border-top: 4px solid $COLOR_E
@@ -414,31 +464,24 @@ i
   width: 80%
   padding: 40px
   background-color: white
+  display: inline-block
+  box-shadow: 0 3px 5px rgba(0,0,0,0.12), 0 3px 5px rgba(0,0,0,0.24)
 
-.middle
-  .title
-    font-size: 30px
-    font-weight: bold
-    color: #333
 
-    i
-      position: absolute
-      cursor: pointer
-      z-index: 1
-      top: 8px
-      right: 90px
+.icons
+  position: absolute
+  top: 10px
+  right: 14px
+  z-index: 1
 
-    i:hover
-      color: #666
+  i
+    font-size: 18px
+    display: inline-block
+    float: right
+    margin-right: 10px
 
-    i.delete
-      top: 8px
-      right: 24px
-
-    i.expand
-      top: 8px
-      right: 60px
-
+  i:hover
+    color: $COLOR_B
 
 .tags
   margin-bottom: 20px
@@ -459,6 +502,10 @@ i
     background-color: white
     border-top: 4px solid $COLOR_E
     margin-bottom: 10px
+    box-shadow: 0 3px 5px rgba(0,0,0,0.12), 0 3px 5px rgba(0,0,0,0.24)
+
+  .tagnote:hover
+    box-shadow: 0 3px 5px rgba(0,0,0,0.22), 0 3px 5px rgba(0,0,0,0.34)
 
 .fc-content
   cursor: pointer
@@ -466,3 +513,33 @@ i
 .ch
   padding: 20px
   background-color: white
+
+.analyticsPanel
+  .empty
+    text-align: center
+    padding-top: 100px
+
+    i
+      font-size: 60px
+
+    .content
+      font-size: 40px
+
+    p
+      font-size: 24px
+
+.calendarPanel
+  text-align: center
+
+.tagPanel
+  .empty
+    padding-top: 100px
+    text-align: center
+    font-size: 40px
+
+    p
+      font-size: 24px
+
+    i
+      font-size: 60px
+      color: #333

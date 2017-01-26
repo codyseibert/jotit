@@ -30,25 +30,6 @@
       .col-md-3
         div
           .folders
-            .add
-              button(
-                ng-click="addTopic()"
-              )
-                i.fa.fa-plus
-                | New Topic
-                
-              button.delete(
-                ng-show="current.parent"
-                ng-click="deleteTopic(current)"
-              )
-                i.fa.fa-remove
-                | Delete Topic
-                
-            .empty(
-              ng-show="!current.topics.length || current.topics.length === 0"
-            )
-              h5 There are no topics
-            
             .folder(
               ng-click="openTopic(topic)"
               ng-repeat="topic in current.topics"
@@ -61,7 +42,6 @@
               )
                 i.fa.fa-bookmark-o
               .title(
-                ng-click="topic.editing = true"
                 ng-show="!topic.editing"
               ) {{topic.title}}
               input.topic(
@@ -80,11 +60,30 @@
                 ng-show="topic.hovered && !topic.editing"
                 ng-click="$event.stopPropagation(); topic.editing = true"
               )
+              i.fa.fa-trash(
+                ng-show="topic.hovered && !topic.editing"
+                ng-click="deleteTopic(topic)"
+              )
               .count 
                 .circle 
                 span(
                   ng-class="{'double': count(topic) > 9}"
                 ) {{count(topic)}}
+                
+            .empty(
+              ng-show="!current.topics.length || current.topics.length === 0"
+            )
+              i.fa.fa-bookmark-o
+              h5 No Topics Created
+              
+            .add
+              button(
+                ng-click="addTopic()"
+              )
+                i.fa.fa-plus
+                | New Topic
+                
+            
 
       .col-md-9.middle
         .row.toolbar
@@ -140,12 +139,15 @@
                 | Notes
                 
                 
-        .row(
+        .row.tagPanel(
           ng-show="showPanel === 'tags'"
         )
-          div(
+          .empty(
             ng-show="tagKeys.length === 0"
-          ) You have no tags
+          ) 
+            i.fa.fa-tags 
+            .text No Tags Found
+            p Use the '#' character to add tags to notes. <br> For example '#hello' will create a tag called hello.
           
           .row.tags(
             ng-repeat="tagKey in tagKeys"
@@ -160,7 +162,7 @@
                 ng-click="expand(note)"
               )
         
-        .row(
+        .row.calendarPanel(
           ng-show="showPanel === 'calendar'"
         )
           .calendar(
@@ -168,12 +170,12 @@
             ng-model="eventSources"
           )
           
-        .row(
+        .row.analyticsPanel(
           ng-show="showPanel === 'analytics'"
         )   
           .ch(
             ng-show="labels.length"
-          )
+          ) 
             canvas.chart.chart-line(
               chart-data="data" 
               chart-labels="labels" 
@@ -181,36 +183,54 @@
               chart-click="onClick"
             )
             
-          div(
+          .empty(
             ng-show="!labels.length"
-          ) Use the search bar above to generate charts for any note in this topic which has both a date and quantity in the markdown.  The date must be in the format of "1/1/2001", and the quantity must be in the format of "fun(5)".
-
+          ) 
+            i.fa.fa-line-chart
+            .content No Analytics Found
+            p Try adding an analytic string to your note. <br>For example, add 'money(1000)' and '1/1/2017' to a note <br> in order to create a chart of money vs time.
+            
         .row(
           ng-show="showPanel === 'notes'"
         )
-          .notes 
-            .empty(
-              ng-show="!getNotes(current).length"
+          .notes
+            .col-md-4(
+              ng-if="!getNotes(current).length"
             )
-              h5 There are no notes
+              .empty
+                i.fa.fa-sticky-note-o
+                 
+                h5 This topic has no notes
+              
+                button(
+                  ng-click="addNote()"
+                )
+                  i.fa.fa-plus
+                  | New Note
               
             .col-md-4(
-              ng-repeat="note in getNotes(current) | filter : noteFilter"
+              ng-repeat="note in getNotes(current) | filter : noteFilter | orderBy : getNoteOrder"
             )
-              .title
-                i.fa.fa-pencil(
-                  ng-click="note.editing = true"
+              .icons
+                i.delete.fa.fa-trash(
                   ng-show="!note.editing"
+                  ng-click="deleteNote(note)"
+                )
+                i.fa(
+                  ng-click="toggleFavorite(note)"
+                  ng-show="!note.editing"
+                  ng-class="{'fa-star': note.favorite, 'fa-star-o': !note.favorite}"
+                )
+                i.expand.fa.fa-expand(
+                  ng-click="expand(note)"
                 )
                 i.fa.fa-save(
                   ng-click="note.editing = false; save()"
                   ng-show="note.editing"
                 )
-                i.delete.fa.fa-trash(
-                  ng-click="deleteNote(note)"
-                )
-                i.expand.fa.fa-expand(
-                  ng-click="expand(note)"
+                i.fa.fa-pencil(
+                  ng-click="note.editing = true"
+                  ng-show="!note.editing"
                 )
               
               .note(
@@ -229,17 +249,18 @@
   ng-show="expanded"
 )
   .inner
-    i.fa.fa-compress(
-      ng-click="compress()"
-    )
-    i.fa.fa-save(
-      ng-show="expanded.editing"
-      ng-click="save(); expanded.editing = false"
-    )
-    i.fa.fa-pencil(
-      ng-show="!expanded.editing"
-      ng-click="expanded.editing = true"
-    )
+    .actions
+      i.fa.fa-close(
+        ng-click="compress()"
+      )
+      i.fa.fa-save(
+        ng-show="expanded.editing"
+        ng-click="save(); expanded.editing = false"
+      )
+      i.fa.fa-pencil(
+        ng-show="!expanded.editing"
+        ng-click="expanded.editing = true"
+      )
     .wrap
       .expanded(
         ng-show="!expanded.editing"

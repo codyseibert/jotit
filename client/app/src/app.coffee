@@ -79,6 +79,7 @@ app.run [
     TokenService
   ) ->
 
-    TokenService.setToken $location.search().t
+    if $location.search().t?
+      TokenService.setToken $location.search().t
 
 ]
