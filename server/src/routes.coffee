@@ -52,7 +52,11 @@ module.exports = do ->
     )
     , (req, res) ->
       if req.user?
-        jwt.sign _id: req.user._id, TOKEN_PASSWORD, algorithm: 'HS256', (err, token) ->
+        user =
+          _id: req.user._id
+          fbId: req.user.fbId 
+          fbAccessToken: req.user.fbAccessToken
+        jwt.sign user, TOKEN_PASSWORD, algorithm: 'HS256', (err, token) ->
           res.redirect "http://noteman.seibertsoftwaresolutions.com/topics?t=#{token}"
       else
         res.status 400

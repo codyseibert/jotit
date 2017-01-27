@@ -28,9 +28,9 @@ module.exports = [
       '#FEDAB3'
       '#EBC9D9'
     ]
-
+    
     $scope.share = (note) ->
-      FB.api "/me/feed",
+      FB.api "https://graph.facebook.com/#{user.fbId}/feed?app_id=#{1901234816764848}&access_token=#{user.fbAccessToken}",
         "POST",
         "message": note.markdown,
         (response) ->
