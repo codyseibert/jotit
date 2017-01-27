@@ -1,6 +1,6 @@
 #main
   .header
-    .logo NOTEMAN BETA
+    .logo NOTEMAN ALPHA
     
     .right
       .logout
@@ -213,6 +213,11 @@
               .col-md-4(
                 ng-repeat="note in getNotes(current) | filter : noteFilter | orderBy : getNoteOrder"
               )
+                .iconsLeft
+                  i.fa.fa-facebook(
+                    ng-click="share(note)"
+                  ) 
+              
                 .icons
                   i.delete.fa.fa-trash(
                     ng-show="!note.editing"
@@ -234,7 +239,7 @@
                     ng-click="note.editing = true"
                     ng-show="!note.editing"
                   )
-                
+                  
                 .note(
                   marked="note.markdown"
                   ng-show="!note.editing"
@@ -289,7 +294,7 @@
         textarea(
           ng-model="request.description"
         )
-        button(
+        button.btn-primary(
           ng-click="saveRequest()"
         ) 
           i.fa.fa-submit

@@ -29,6 +29,12 @@ module.exports = [
       '#EBC9D9'
     ]
 
+    $scope.share = (note) ->
+      FB.api "/me/feed",
+        "POST",
+        "message": note.markdown,
+        (response) ->
+
     $scope.showRequestModal = false
     $scope.request = {}
 
@@ -331,7 +337,7 @@ module.exports = [
 
     $scope.logout = ->
       TokenService.setToken null
-      $state.go 'login'
+      $state.go 'main'
 
     $scope.renderCalendar = (calendarId) ->
       $timeout ->

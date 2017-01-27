@@ -10,11 +10,11 @@
               du-smooth-scroll="home"
             ) HOME
             .link(
-              du-smooth-scroll="about"
-            ) ABOUT
-            .link(
               du-smooth-scroll="features"
             ) FEATURES
+            .link(
+              du-smooth-scroll="about"
+            ) ABOUT
             //- .link(
             //-   du-smooth-scroll="pricing"
             //- ) PRICING
@@ -26,91 +26,29 @@
     .container
       .row
         .col-md-6
-          .logo 
-            | NOTEMAN BETA
-            <br>
-            i.fa.fa-smile-o
-            p I'll work on this landing page soon
-        .col-md-4
-          .cta
-            .description 
-              | Take Notes. <br>
-              | Find Notes. <br>
-              | Save Time.
-          
-            button.login(
-              ng-click="loginWithFacebook(agreeB)"
-            )
-              i.fa.fa-facebook
-              .text Sign in with Facebook
-              
-            label
-              input(
-                type="checkbox"
-                ng-model="agreeB"
-              )
-              | I agree with the <a href="/tos" target="_blank">Terms of Service</a> and have read the <a href="pp" target="_blank">Privacy Policy</a>
+          .logo NOTEMAN ALPHA
             
-
-  #about.info
-    .container
-      .row
-        .col-md-12 
-          h1 Taking Notes is Easy
-      .row
-        .col-md-6
-          ul
-            li Take notes using <b>markdown</b>
-            li Powerful search tools
-            li Tree based topics for organization
-            li Your notes are encrypted and safe with us
+          .description 
+            .one Take Notes.
+            .two Find Notes.
+            .three Save Time.
           
-        .col-md-6
-          img.laptop(
-            src="assets/images/laptop_med.png"
-          )
-      .row
-        .col-md-12
-          h1 Automatic Analytics
-          
-      .row
-        .col-md-6
-          img.laptop(
-            src="assets/images/laptop_b.png"
-          )
-        .col-md-6
-          ul
-            li Annotate you notes with quantitative text 
-            li Line, bar, and pie charts are automatically created using your notes
-            li Share notes and topics
-            li Automatically view your notes on a calendar 
-            
-      .row 
-        .col-md-6
-          h1 Calendar
-          img.laptop(
-            src="assets/images/laptop_c.png"
-          )
-        .col-md-6
-          h1 Tags
-          img.laptop(
-            src="assets/images/laptop_d.png"
-          )
-      
-      .row.facebook
-        .col-md-4
-        .col-md-4
           button.login(
-            ng-click="loginWithFacebook(agreeA)"
+            ng-click="loginWithFacebook(agreeB)"
           )
             i.fa.fa-facebook
             .text Sign in with Facebook
+            
           label
             input(
               type="checkbox"
-              ng-model="agreeA"
+              ng-model="agreeB"
             )
             | I agree with the <a href="/tos" target="_blank">Terms of Service</a> and have read the <a href="pp" target="_blank">Privacy Policy</a>
+        .col-md-6 
+          img.tablet(
+            src="assets/images/tablet_a.png"
+          )
           
   #features.features
     .container
@@ -154,6 +92,65 @@
             h1 Search
             span Use our powerful search tool for find the note you need instantly
             
+  #about.info
+    .container
+      .row
+        .col-md-6
+          h1 Taking Notes is Easy
+        
+          ul
+            li Take notes using <b>markdown</b>
+            li Powerful search tools
+            li Tree based topics for organization
+            li Your notes are encrypted and safe with us
+          
+        .col-md-6
+          img.laptop(
+            src="assets/images/laptop_med.png"
+          )
+          
+      .row
+        .col-md-6
+          img.laptop(
+            src="assets/images/laptop_b.png"
+          )
+        .col-md-6
+          h1 Automatic Analytics
+        
+          ul
+            li Annotate you notes with quantitative text 
+            li Line, bar, and pie charts are automatically created using your notes
+            li Share notes and topics
+            li Automatically view your notes on a calendar 
+            
+      .row 
+        .col-md-6
+          h1 Calendar
+          img.laptop2(
+            src="assets/images/laptop_c.png"
+          )
+        .col-md-6
+          h1 Tags
+          img.laptop2(
+            src="assets/images/laptop_d.png"
+          )
+      
+      .row.facebook
+        .col-md-4
+        .col-md-4
+          button.login(
+            ng-click="loginWithFacebook(agreeA)"
+          )
+            i.fa.fa-facebook
+            .text Sign in with Facebook
+          label
+            input(
+              type="checkbox"
+              ng-model="agreeA"
+            )
+            | I agree with the <a href="/tos" target="_blank">Terms of Service</a> and have read the <a href="pp" target="_blank">Privacy Policy</a>
+          
+  
   //- #pricing
   //-   .container
   //-     .row

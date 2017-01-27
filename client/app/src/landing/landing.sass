@@ -1,12 +1,18 @@
 #landing
   a
-    color: #999
+    color: $COLOR_B
+
+
   .logo
     color: white
 
   .facebook
     padding-top: 30px
     padding-bottom: 30px
+
+  .tablet
+    width: 100%
+    margin-top: 160px
 
   button
     color: white
@@ -39,14 +45,29 @@
     background: -webkit-linear-gradient(-45deg,  $COLOR_HERO_A 0%,$COLOR_HERO_B 50%,$COLOR_HERO_C 100%)
     background: linear-gradient(135deg,  $COLOR_HERO_A 0%,$COLOR_HERO_B 50%,$COLOR_HERO_C 100%)
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='$COLOR_HERO_A', endColorstr='$COLOR_HERO_C',GradientType=1 )
-    height: 100%
+    height: 670px
     width: 100%
 
   .info
+    background-color: $COLOR_E
+    color: white
+
+    h1
+      margin-top: 80px
+
+    a
+      color: $COLOR_B
 
     .laptop
       width: 100%
-      margin-top: 0px
+      margin-top: 80px
+
+    .laptop2
+      width: 100%
+
+    .facebook
+      margin-top: 40px
+      margin-bottom: 40px
 
     ul
       li
@@ -54,9 +75,8 @@
         margin-top: 30px
 
   .features
-    margin-top: 40px
-    background-color: $COLOR_D
-    color: white
+    background-color: white
+    color: #333
     padding-bottom: 60px
 
     .bullet
@@ -64,6 +84,7 @@
 
       i
         font-size: 60px
+        color: $COLOR_D
 
       h1
         font-size: 40px
@@ -103,8 +124,14 @@
     .link:hover
       color: $COLOR_B
 
+  label
+    margin-top: 10px
+    font-size: 20px
+
+    input
+      margin-right: 10px
+
   .logo
-    text-align: center
     width: 100%
     font-size: 80px
     padding-top: 70px
@@ -112,8 +139,17 @@
     i
       font-size: 180px
 
-  .cta
-    .description
-      padding-top: 100px
-      color: white
-      font-size: 50px
+
+  .description
+    // padding-top: 100px
+    color: white
+    font-size: 50px
+
+    .one
+      margin-left: 0px
+
+    .two
+      margin-left: 100px
+
+    .three
+      margin-left: 200px
