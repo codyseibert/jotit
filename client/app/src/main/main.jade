@@ -213,11 +213,11 @@
               .col-md-4(
                 ng-repeat="note in getNotes(current) | filter : noteFilter | orderBy : getNoteOrder"
               )
-                .iconsLeft
-                  i.fa.fa-facebook(
-                    ng-if="user.fbId"
-                    ng-click="share(note)"
-                  ) 
+                //- .iconsLeft
+                //-   i.fa.fa-facebook(
+                //-     ng-if="user.fbId"
+                //-     ng-click="share(note)"
+                //-   ) 
               
                 .icons
                   i.delete.fa.fa-trash(

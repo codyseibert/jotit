@@ -43,7 +43,7 @@ module.exports = do ->
   app.get '/login/facebook',
     passport.authenticate 'facebook',
       session: false
-      scope: ['email', 'publish_actions']
+      scope: ['email']
 
   app.get '/login/facebook/callback',
     passport.authenticate('facebook',
