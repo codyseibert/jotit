@@ -43,7 +43,7 @@ module.exports = do ->
   app.get '/login/facebook',
     passport.authenticate 'facebook',
       session: false
-      scope: ['email']
+      scope: ['email', 'user_posts']
 
   app.get '/login/facebook/callback',
     passport.authenticate('facebook',
@@ -54,7 +54,7 @@ module.exports = do ->
       if req.user?
         user =
           _id: req.user._id
-          fbId: req.user.fbId 
+          fbId: req.user.fbId
           fbAccessToken: req.user.fbAccessToken
         jwt.sign user, TOKEN_PASSWORD, algorithm: 'HS256', (err, token) ->
           res.redirect "http://noteman.seibertsoftwaresolutions.com/topics?t=#{token}"
