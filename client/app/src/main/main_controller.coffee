@@ -28,6 +28,8 @@ module.exports = [
       '#FEDAB3'
       '#EBC9D9'
     ]
+
+    user = TokenService.getUser()
     
     $scope.share = (note) ->
       FB.api "https://graph.facebook.com/#{user.fbId}/feed?app_id=#{1901234816764848}&access_token=#{user.fbAccessToken}",
