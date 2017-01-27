@@ -159,7 +159,7 @@ module.exports = [
           if result?
             evts.push
               title: e.markdown.substring 0, 16
-              start: result[0].replace '/', '-'
+              start: result[0]#.replace /\//g, '-'
               note: e
       if node.topics?
         _.each node.topics, (t) ->
@@ -332,6 +332,12 @@ module.exports = [
     $scope.logout = ->
       TokenService.setToken null
       $state.go 'login'
+
+    $scope.renderCalendar = (calendarId) ->
+      $timeout ->
+        calendarTag = $ '.calendar'
+        calendarTag.fullCalendar 'render'
+        refreshEvents()
 
     back = ->
       $scope.current = $scope.current.parent

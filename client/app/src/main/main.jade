@@ -115,7 +115,7 @@
               .showCalendar
                 button(
                   ng-class="{'selected': showPanel === 'calendar'}"
-                  ng-click="showPanel = 'calendar'"
+                  ng-click="showPanel = 'calendar'; renderCalendar();"
                 )
                   i.fa.fa-calendar
                   | Calendar
@@ -189,7 +189,7 @@
               ng-show="!chartKeys.length"
             ) 
               i.fa.fa-line-chart
-              .content No Analytics Found
+              h1 No Analytics Found
               p Try adding an analytic string to your note. <br>For example, add 'money(1000)' and '1/1/2017' to a note <br> in order to create a chart of money vs time.
               
           .row(

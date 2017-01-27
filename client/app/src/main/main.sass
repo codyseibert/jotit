@@ -1,30 +1,4 @@
 #main
-  button
-    padding: 10px
-    background-color: $COLOR_A
-    border: none
-    color: white
-    width: 120px
-    margin-right: 10px
-    border: 2px solid rgba(255, 255, 255, 0) !important
-    outline: none
-
-  button.selected
-    // background-color: #FFF !important
-    // color: #666 !important
-    border: 2px solid $COLOR_B !important
-    outline: none
-
-  .logo
-    position: absolute
-    font-size: 36px
-    color: #FFF
-    left: 20px
-
-  i
-    cursor: pointer
-    position: relative
-    margin-right: 5px
 
   .header
     width: 100%
@@ -49,6 +23,16 @@
       cursor: pointer
       position: relative
       margin-right: 5px
+
+    .right
+      text-align: right
+
+    .logo
+      position: absolute
+      font-size: 36px
+      color: #FFF
+      left: 20px
+
 
   .card1
     background: #fff
@@ -80,6 +64,27 @@
 
   .toolbar
     margin-bottom: 26px
+
+    button
+      padding: 10px
+      background-color: $COLOR_A
+      border: none
+      color: white
+      width: 120px
+      margin-right: 10px
+      border: 2px solid rgba(255, 255, 255, 0) !important
+      outline: none
+
+    button.selected
+      // background-color: #FFF !important
+      // color: #666 !important
+      border: 2px solid $COLOR_B !important
+      outline: none
+
+    i
+      cursor: pointer
+      position: relative
+      margin-right: 5px
 
   .showNotes
     float: right
@@ -417,9 +422,6 @@
     border: 1px solid #999
     outline: none
 
-  .right
-    text-align: right
-
   .note-modal
     position: fixed
     z-index: 1
@@ -475,7 +477,6 @@
     display: inline-block
     box-shadow: 0 3px 5px rgba(0,0,0,0.12), 0 3px 5px rgba(0,0,0,0.24)
 
-
   .icons
     position: absolute
     top: 10px
@@ -523,6 +524,9 @@
 
   .analyticsPanel
 
+    h1
+      font-weight: normal
+      
     .title
       font-size: 30px
       text-align: right
@@ -600,12 +604,27 @@
         background-color: $COLOR_B
 
   .openRequestModal
+    z-index: 20
     position: fixed
     bottom: 20px
     right: 20px
     background-color: $COLOR_J
     width: 220px
     font-size: 18px
+    border: 2px solid rgba(255, 255, 255, 0) !important
+    outline: none
+
+  button.openRequestModal
+    padding: 10px
+    background-color: $COLOR_B
+    border: none
+    color: white
+    width: 120px
+    width: 220px
+    margin-right: 10px
+    border: 2px solid rgba(255, 255, 255, 0) !important
+    outline: none
 
     i
       font-size: 18px
+      margin-right: 10px
