@@ -53,7 +53,7 @@
                   ng-class="{'focus': topic.focus}"
                   ng-enter="$event.stopPropagation(); topic.editing = false; save()"
                 )
-                i.fa.fa-save(
+                i.fa.fa-check-circle(
                   ng-show="topic.editing"
                   ng-click="$event.stopPropagation(); topic.editing = false; save()"
                 )
@@ -218,11 +218,38 @@
                 //-     ng-if="user.fbId"
                 //-     ng-click="share(note)"
                 //-   ) 
+                
+                .editTags(
+                  ng-show="note.editTags"
+                )
+                  i.fa.fa-times-circle.close(
+                    ng-click="note.editTags = false"
+                  )
+                  .add
+                    input(
+                      ng-model="note.tagToAdd"
+                      placeholder="enter a tag"
+                      ng-enter="addTag(note)"
+                    )
+                    i.fa.fa-check-circle(
+                      ng-click="addTag(note)"
+                    )
+                  .tags
+                    .tag(
+                      ng-repeat="tag in note.tags track by $index"
+                    ) 
+                      | {{tag}}
+                      i.fa.fa-times-circle(
+                        ng-click="deleteTag(note, tag)"
+                      )
               
                 .icons
                   i.delete.fa.fa-trash(
                     ng-show="!note.editing"
                     ng-click="deleteNote(note)"
+                  )
+                  i.expand.fa.fa-tags(
+                    ng-click="editTags(note)"
                   )
                   i.fa(
                     ng-click="toggleFavorite(note)"
@@ -232,7 +259,7 @@
                   i.expand.fa.fa-expand(
                     ng-click="expand(note)"
                   )
-                  i.fa.fa-save(
+                  i.fa.fa-check-circle(
                     ng-click="note.editing = false; save()"
                     ng-show="note.editing"
                   )
@@ -261,7 +288,7 @@
         i.fa.fa-close(
           ng-click="compress()"
         )
-        i.fa.fa-save(
+        i.fa.fa-check-circle(
           ng-show="expanded.editing"
           ng-click="save(); expanded.editing = false"
         )

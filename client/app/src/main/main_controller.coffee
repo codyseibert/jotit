@@ -30,7 +30,7 @@ module.exports = [
     ]
 
     user = TokenService.getUser()
-    
+
     $scope.share = (note) ->
       FB.api "https://graph.facebook.com/#{user.fbId}/feed?app_id=#{1901234816764848}&access_token=#{user.fbAccessToken}",
         "POST",
@@ -49,6 +49,20 @@ module.exports = [
 
     $scope.alertEventOnClick = (event) ->
       $scope.expanded = event.note
+
+    $scope.editTags = (note) ->
+      note.editTags = !note.editTags
+
+    $scope.addTag = (note) ->
+      note.tags ?= []
+      return if note.tagToAdd in ['', null, undefined]
+      return if note.tags.indexOf(note.tagToAdd) isnt -1
+      note.tags.push "#{note.tagToAdd}"
+      note.tagToAdd = ''
+      $scope.save()
+
+    $scope.deleteTag = (note, tag) ->
+      note.tags.splice note.tags.indexOf(tag), 1
 
     $scope.uiConfig =
       calendar:
@@ -188,11 +202,8 @@ module.exports = [
       if node.notes?
         for note in node.notes
           continue if not note?
-          if $scope.search isnt ''
-            continue if note.markdown.indexOf($scope.search) is -1
-          re = /#[0-9a-zA-Z]+/g
-          while (result = re.exec(note.markdown))
-            tag = result[0]
+          continue if not note.tags?
+          for tag in note.tags
             tags[tag] ?= []
             tags[tag].push note
 
