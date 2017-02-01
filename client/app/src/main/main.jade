@@ -31,7 +31,7 @@
         .col-md-3
           div
             .folders
-              .folder(
+              .folder.fade-in(
                 ng-click="openTopic(topic)"
                 ng-repeat="topic in current.topics"
                 ng-style="{'background-color': getColor($index)}"
@@ -71,8 +71,8 @@
                     ng-class="{'double': count(topic) > 9}"
                   ) {{count(topic)}}
                   
-              .empty(
-                ng-show="!current.topics.length || current.topics.length === 0"
+              .empty.fade-in(
+                ng-if="!current.topics.length || current.topics.length === 0"
               )
                 i.fa.fa-bookmark-o
                 h5 No Topics Created
@@ -131,13 +131,14 @@
               .showNotes
                 button(
                   ng-class="{'selected': showPanel === 'notes'}"
-                  ng-click="showPanel = 'notes'"
+                  ng-click="showPanel = 'notes'; refreshNotes();"
                 )
                   i.fa.fa-sticky-note
                   | Notes
 
-          .row.tagPanel(
+          .row.tagPanel.fade(
             ng-show="showPanel === 'tags'"
+            ng-animate-children="true"
           )
             .empty(
               ng-show="tagKeys.length === 0"
@@ -159,7 +160,7 @@
                   ng-click="expand(note)"
                 )
           
-          .row.calendarPanel(
+          .row.calendarPanel.fade(
             ng-show="showPanel === 'calendar'"
           )
             .calendar(
@@ -167,7 +168,7 @@
               ng-model="eventSources"
             )
             
-          .row.analyticsPanel(
+          .row.analyticsPanel.fade(
             ng-show="showPanel === 'analytics'"
           )   
             .row.chrts(
@@ -192,11 +193,11 @@
               h1 No Analytics Found
               p Try adding an analytic string to your note. <br>For example, add 'money(1000)' and '1/1/2017' to a note <br> in order to create a chart of money vs time.
               
-          .row(
+          .row.fade(
             ng-show="showPanel === 'notes'"
           )
             .notes
-              .col-md-12(
+              .col-md-12.fade-in(
                 ng-if="!getNotes(current).length"
               )
                 .empty
@@ -210,16 +211,10 @@
                     i.fa.fa-plus
                     | New Note
                 
-              .col-md-4(
+              .col-md-4.fly-in-bottom(
                 ng-repeat="note in getNotes(current) | filter : noteFilter | orderBy : getNoteOrder"
               )
-                //- .iconsLeft
-                //-   i.fa.fa-facebook(
-                //-     ng-if="user.fbId"
-                //-     ng-click="share(note)"
-                //-   ) 
-                
-                .editTags(
+                .editTags.fade-fast(
                   ng-show="note.editTags"
                 )
                   i.fa.fa-times-circle.close(
@@ -248,6 +243,9 @@
                     ng-show="!note.editing"
                     ng-click="deleteNote(note)"
                   )
+                  //- i.expand.fa.fa-line-chart(
+                  //-   ng-click="editAnalytics(note)"
+                  //- )
                   i.expand.fa.fa-tags(
                     ng-click="editTags(note)"
                   )
@@ -280,7 +278,7 @@
                     ng-model="note.markdown"
                   )
                   
-  .note-modal(
+  .note-modal.fade-fast(
     ng-show="expanded"
   )
     .inner
@@ -308,7 +306,7 @@
             ng-model="expanded.markdown"
           )
           
-  .requestModal(
+  .requestModal.fade-fast(
     ng-show="showRequestModal"  
   )
     .inner
